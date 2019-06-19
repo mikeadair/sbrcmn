@@ -1,0 +1,1997 @@
+swagger: '2.0'
+info:
+  title: common-v15
+  version: "v2"
+  description: common-v15
+  contact:
+    name: Contact Us
+    url: 'https://beta.developer.sabre.com/contact'
+x-project-id: common-v15
+host: api-crt.cert.havail.sabre.com
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v2/cki/common-v15:
+    post:
+      operationId: common-v15
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: |
+            Bad Request
+securityDefinitions:
+  oauth2_authentication:
+    type: oauth2
+    tokenUrl: 'https://api-crt.cert.havail.sabre.com/v2/auth/token'
+    flow: application
+    x-base64-encode-client-credentials: true
+security:
+  - oauth2_authentication: []
+definitions:
+  AlphaNumericString:
+    type: string
+    pattern: '^([0-9a-zA-Z]+)$'
+    description: Alphanumeric string.
+  TinyString:
+    type: string
+    minLength: 1
+    maxLength: 32
+    description: Tiny string 1 to 32 characters in length.
+  ShortString:
+    type: string
+    minLength: 1
+    maxLength: 128
+    description: Tiny string 1 to 123 characters in length.
+  MediumString:
+    type: string
+    minLength: 1
+    maxLength: 512
+    description: Tiny string 1 to 512 characters in length.
+  LongString:
+    type: string
+    minLength: 1
+    maxLength: 4096
+    description: Tiny string 1 to 4096 characters in length.
+  Code_Storefront:
+    type: string
+    minLength: 2
+    maxLength: 10
+    pattern: '^([A-Z0-9]{2,10})$'
+    description: >-
+      Specifies a numeric or alphanumeric storefront code 10 characters in
+      length.
+  Enum_Gender:
+    description: Gender indicator e.g.
+    enum:
+      - FEMALE
+      - MALE
+  Enum_MaritalStatus:
+    description: Marital status e.g.
+    enum:
+      - SINGLE
+      - MARRIED
+  Enum_PhoneType:
+    description: Defines possible types of phone numbers e.g.
+    enum:
+      - MOBILE
+      - WORK
+      - HOME
+      - FAX
+      - OTHER
+      - BUSINESS
+      - CELLULAR
+      - HOTEL
+  Enum_AddressType:
+    description: Used to indicate the type of address e.g.
+    enum:
+      - HOME
+      - RESIDENCE
+      - WORK
+      - INVOICE
+      - OTHER
+      - DESTINATION
+      - PRIVATE
+      - BUSINESS
+  Code_Postal:
+    type: string
+    minLength: 1
+    maxLength: 32
+    description: Represents postal code.
+  PaymentCard_MaskedNumber:
+    type: string
+    pattern: '^(X{1,15}[0-9]{4})$'
+    description: Used to store masked credit card number.
+  Enum_EmailType:
+    description: Available types of email addresses e.g.
+    enum:
+      - PERSONAL
+      - WORK
+      - OTHER
+  EmailAddress:
+    description: A generic type used to represent email address.
+    properties:
+      id:
+        type: string
+      value:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Email'
+      type:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_EmailType'
+        description: Indicates the type of the email.
+    required:
+      - value
+    additionalProperties: false
+  Email:
+    type: string
+    minLength: 5
+    maxLength: 256
+    pattern: '^([^@]+@[^@]+\.[^@]+)$'
+    description: 'Email address as defined in RFC 3696 - 3 and errata, RFC 2822 - 3.4.1.'
+  Code_Language:
+    type: string
+    pattern: '^([a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*)$'
+    description: Pattern specifies the content of section 2.12 of XML 1.0e2
+  Code_Phone_Area:
+    type: string
+    pattern: '^([0-9]{1,8})$'
+    description: 1-8 digit area code of the phone number
+  Code_Phone_Country:
+    type: string
+    pattern: '^([0-9]{1,7})$'
+    description: Country code of the phone number.
+  Code_Market:
+    type: string
+    pattern: '^([a-zA-Z0-9]{1,5})$'
+    description: Market code.
+  Name_Market:
+    type: string
+    pattern: '^([a-zA-Z0-9]{1,60})$'
+    description: Market name.
+  Market:
+    description: Description of the market e.g.
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Name_Market'
+      code:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Market'
+        description: Code of the market e.g.
+    required:
+      - value
+      - code
+    additionalProperties: false
+  PaymentCard_ExpirationDetails:
+    type: string
+    pattern: '^(((0?[1-9]|[1-2][0-9]|3[0-1])/)?(0?[1-9]|1[0-2])/[0-9]{2})$'
+    description: In most cases it is month and year when payment card expires.
+  TimeRange:
+    type: object
+    description: Defined period of undated time
+    properties:
+      begin:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/time'
+        description: When the range begins
+      end:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/time'
+        description: When the range ends
+    additionalProperties: false
+  Address:
+    type: object
+    description: A generic type which represents an address.
+    properties:
+      id:
+        type: string
+      type:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_AddressType
+        description: The type of a address.
+      companyName:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Name of the company.
+      personName:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PersonName'
+        description: Passenger name
+      street1:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Street part of an address.
+      street2:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Additional street part which might be required in some cases
+      postalCode:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Postal'
+        description: Postal code.
+      country:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
+        description: 'PseudoCity code and default currency, if specified.'
+      city:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: City name
+      stateProvince:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: State or province.
+    additionalProperties: false
+  PaymentCard:
+    type: object
+    description: 'A generic type used to represent payment card: credit, debit etc.'
+    properties:
+      id:
+        type: string
+      typeCode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/PaymentCard_TypeCode
+        description: The code of the card e.g.
+      cardType:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_PaymentCardType
+        description: Type of Payment Card whether CreditCard or DebitCard
+      number:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/PaymentCard_Number
+        description: The actual payment card number
+      nameOnCard:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Owner name on the card
+      expirationDetails:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/PaymentCard_ExpirationDetails
+        description: Month and year until the card is valid
+    required:
+      - typeCode
+      - number
+    additionalProperties: false
+  Phone:
+    type: object
+    description: A genetic type used to represent phone number
+    properties:
+      type:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_PhoneType'
+        description: Type of the phone number e.g.
+      countryCode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_Phone_Country
+        description: Country code portion of the number.
+      areaCode:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Phone_Area'
+        description: Area code portion of the number
+      number:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PhoneNumber'
+        description: The actual number
+      extension:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PhoneNumber'
+        description: Optional extension suffix
+    required:
+      - number
+    additionalProperties: false
+  PersonName:
+    type: object
+    description: A generic type used to represent traveler name
+    properties:
+      prefix:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        description: 'Prefix placed before the passenger name, such as Mr., Dr., Ms, etc.'
+      first:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: First name
+      middle:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Optional middle name
+      last:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Last name
+      suffix:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        description: Optional suffix
+      raw:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Passenger surname as stored in the system.
+    required:
+      - first
+      - last
+    additionalProperties: false
+  Enum_DocumentType:
+    description: >-
+      NATIONAL_ID and NEXUS_CARD can be used as identity document to travel
+      between countries in lieu of a passport.
+    enum:
+      - PASSPORT
+      - PASSPORT_DIPLOMATIC
+      - PASSPORT_SERVICE
+      - PASSPORT_SPECIAL
+      - ALIEN_RESIDENT_CARD
+      - PERMANENT_RESIDENT_CARD
+      - FACILITATION_DOC
+      - MILITARY_ID
+      - US_NATURALIZATION_CERT
+      - REENTRY_PERMIT
+      - BORDER_CROSSING_CARD
+      - REFUGEE_TRAVEL_DOCUMENT
+      - VISA
+      - NATIONAL_ID
+      - NEXUS_CARD
+  Money:
+    description: A generic type used to represent monetary amount
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Amount'
+      currency:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Currency'
+        description: Code of the currency
+    required:
+      - value
+      - currency
+    additionalProperties: false
+  LoyaltyPoints:
+    type: integer
+    minimum: -2147483648
+    maximum: 2147483647
+    description: Used to hold Frequent Flyer points which are always positive numbers.
+  Mileage:
+    description: Represents distance
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/int'
+      unit:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_MileageUnit
+        description: Unit of the stored mileage e.g.
+    required:
+      - value
+      - unit
+    additionalProperties: false
+  Enum_MileageUnit:
+    description: Mileage unit.
+    enum:
+      - MILES
+      - KILOMETERS
+  LoyaltyAccount:
+    type: object
+    description: A generic type used to represents Frequent Flyer /Loyalty account
+    properties:
+      id:
+        type: string
+      memberAirline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: Member airline code.
+      memberId:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Member identifier - the format depends on the airline
+      mileage:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Mileage'
+        description: Current mileage value associated with the loyalty account
+      points:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/LoyaltyPoints'
+        description: Price expressed in frequent flyer points/miles
+      loyaltyTierLevel:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/LoyaltyTierLevel
+        description: Passenger's loyalty account tier level.
+      membershipStartDate:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        description: Date when the member joined the loyalty program.
+      latestAwardDate:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        description: Last time when the member was awarded.
+    required:
+      - memberAirline
+      - memberId
+    additionalProperties: false
+  Document:
+    type: object
+    description: Represents a document issued for the user
+    properties:
+      id:
+        type: string
+      type:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_DocumentType
+        description: Type of the document
+      number:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        description: Document number
+      personName:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PersonName'
+        description: Passenger name
+      nationality:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_Country_Extended
+        description: Nationality country code
+      countryOfBirth:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
+        description: The code of country where the person was born.
+      placeOfBirth:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/String_From1to35
+        description: >-
+          This element contains unstructured details about person's place of
+          birth.
+      dateOfBirth:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        description: Date of birth if different than in containing structure
+      issuingCountry:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
+        description: The code of country which issued the document
+      applicableCountry:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
+        description: The code of country which the document is applicable for e.g.
+      issuingPlace:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: The place where the document has been issued
+      issueDate:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        description: Date when the document was issued
+      expiryDate:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        description: Date when the document will expire
+      gender:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_Gender'
+        description: Gender as provided in the document
+    required:
+      - type
+      - number
+    additionalProperties: false
+  Enum_ProfileType:
+    description: Defines possible types of returned profiles e.g.
+    enum:
+      - WEB
+      - LOYALTY
+  FlightStop:
+    type: object
+    description: Represents break during a single segment e.g.
+    properties:
+      airport:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: Indicates the location where the stop occurs
+      arrivalTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: Arrival date and time
+      departureTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: Departure date and time
+      duration:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/DurationInMinutes
+        description: Time at the stop airport expressed in minutes.
+      elapsedTime:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/DurationInMinutes
+        description: >-
+          Flight time from departure airport to layover airport expressed in
+          minutes.
+    required:
+      - airport
+      - arrivalTime
+      - departureTime
+    additionalProperties: false
+  DurationInMinutes:
+    type: integer
+    minimum: -2147483648
+    maximum: 2147483647
+    description: Represents duration in minutes.
+  RecordLocator:
+    type: string
+    minLength: 5
+    maxLength: 8
+    pattern: '^([A-Za-z0-9]{5,8})$'
+    description: Passenger Name Record locator
+  EmergencyContact:
+    type: object
+    description: Contact data which should be used in case of emergency
+    properties:
+      id:
+        type: string
+      name:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: May be a person name or business name.
+      countryCode:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
+        description: Country associated with the emergency contact details
+      contactDetails:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: May be anything but usually it is a phone number
+      relationship:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Relationship between emergency contact and passenger(s)
+    additionalProperties: false
+  Enum_WeightUnit:
+    description: Weight unit e.g.
+    enum:
+      - KILOGRAM
+      - POUND
+  Weight:
+    description: Represents weight of an object e.g.
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/WeightValue'
+      unit:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_WeightUnit'
+        description: Weight unit e.g.
+    required:
+      - value
+      - unit
+    additionalProperties: false
+  Enum_CabinClass:
+    enum:
+      - ECONOMY
+      - PREMIUM_ECONOMY
+      - BUSINESS
+      - PREMIUM_BUSINESS
+      - FIRST
+      - PREMIUM_FIRST
+  Code_BookingClass:
+    type: string
+    minLength: 1
+    maxLength: 1
+    pattern: '^([A-Z])$'
+    description: Booking class code also known as RBD (Reservations/Booking Designator).
+  Code_FareBrand:
+    type: string
+    pattern: '^([A-Z0-9]{1,10})$'
+    description: Fare brand code
+  Enum_ItineraryPartType:
+    enum:
+      - OUTBOUND
+      - INBOUND
+      - MULTICITY
+  Code_Meal:
+    type: string
+    minLength: 1
+    maxLength: 20
+    pattern: '^([A-Z0-9]{1,20})$'
+    description: Meal code served on an aircraft
+  Code_SpecialService:
+    type: string
+    minLength: 1
+    maxLength: 20
+    pattern: '^([A-Z0-9]{1,20})$'
+    description: Code of a special service requested by a passenger
+  Enum_FlightSpan:
+    enum:
+      - DOMESTIC
+      - INTERNATIONAL
+  SeatNumber:
+    type: string
+    minLength: 1
+    maxLength: 5
+    description: Seat number on an aircraft
+  ContactDetails:
+    type: object
+    description: The representation of traveller's contact information.
+    properties:
+      email:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/EmailAddress'
+          description: Email addresses associated with the profile
+        maxItems: 10
+      phone:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Phone'
+          description: Phone numbers associated with the profile
+        maxItems: 10
+      address:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Address'
+          description: Addresses associated with the profile
+        maxItems: 10
+    additionalProperties: false
+  Enum_PassengerTypeBase:
+    description: >-
+      Used instead of OpenEnumeration to be able to validate extension attribute
+      format.
+    enum:
+      - ADULT
+      - SENIOR
+      - YOUTH
+      - CHILD
+      - CHILD_04
+      - CHILD_11
+      - INFANT
+      - INFANT_WITH_SEAT
+      - STUDENT
+      - MILITARY
+      - SENIOR_CITIZEN
+      - FREQUENT_FLYER
+      - COMPANION
+      - ADULT_WITH_COMPANION
+      - Other
+  Enum_PassengerTypeBaseExtension:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z0-9]{3})$'
+  Enum_PassengerType:
+    description: Type of the passengers.
+    properties:
+      value:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_PassengerTypeBase
+      extension:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_PassengerTypeBaseExtension
+    required:
+      - value
+    additionalProperties: false
+  Pnr_NameNumber:
+    type: string
+    minLength: 3
+    maxLength: 5
+    pattern: '^([0-9]{1,2}\.[0-9]{1,2})$'
+    description: PNR passenger name number
+  Enum_SpecialServiceStatus:
+    enum:
+      - REQUESTED
+      - CONFIRMED
+      - REJECTED
+  Enum_SpecialServiceType:
+    enum:
+      - STANDARD
+      - MEAL
+      - OTHER
+  Pnr_SegmentNumber:
+    type: string
+    minLength: 1
+    maxLength: 10
+    pattern: '^([0-9]{1,10})$'
+    description: PNR segment number
+  PriceElement:
+    type: object
+    description: A generic type used to represent a price or a price component.
+    properties:
+      code:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: An optional code used to specify a subtype of a price e.g.
+      override:
+        type: boolean
+        description: Attribute relevant only for tax price element in Reprice operation.
+      referenceAmount:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Money'
+        description: >-
+          Value that is not used as the amount a passenger should pay for the
+          fare.
+      amount:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Money'
+        description: >-
+          Regulatory price amount in the original currency in which the fare was
+          defined.
+      equivAmount:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Money'
+        description: Regulatory price amount converted to the requested currency
+      points:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/LoyaltyPoints'
+        description: Price expressed in frequent flyer points/miles
+      conversionRatio:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ConversionRatio'
+        description: Details required to convert loyalty points/miles to a monetary amount.
+      taxType:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_TaxType'
+        description: An optional type used to specify a tax application type
+    additionalProperties: false
+  PriceBreakdown:
+    type: object
+    description: This structure is used to represent total fare.
+    properties:
+      total:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+        description: Grand total price for the fare.
+      base:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+        description: >-
+          Base amount of the ancillary fee that can also include taxes if
+          TaxesIncludedInBase is set to 'true'
+      tax:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+          description: >-
+            Generic type code used to represent a price or a price component
+            that supports both monetary and/or frequent flyer type of amounts.
+        maxItems: 20
+      fee:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+          description: Summarized fee prices
+        maxItems: 20
+      surcharge:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+          description: Summarized surcharge prices
+        maxItems: 20
+      commission:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+          description: Commission amount charged as part of this price.
+        maxItems: 20
+      discount:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+          description: Applicable discounts.
+        maxItems: 20
+    additionalProperties: false
+  Enum_OperationType:
+    description: 'Define possible modification types: ADD, MODIFY, DELETE, VERIFY'
+    enum:
+      - ADD
+      - MODIFY
+      - DELETE
+      - VERIFY
+  Version:
+    type: string
+    minLength: 1
+    maxLength: 512
+    description: Used to implement optimistic locking mechanism
+  Code_Country:
+    type: string
+    minLength: 2
+    maxLength: 2
+    pattern: '^([A-Z]{2})$'
+    description: ISO 3166-1 alpha-2 country codes
+  Code_Country_Extended:
+    type: string
+    minLength: 2
+    maxLength: 3
+    pattern: '^([A-Z]{2,3})$'
+    description: 2 or 3 letter country code.
+  Code_City:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([a-zA-Z]{3})$'
+    description: 3-letter city code
+  Code_Currency:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z]{3})$'
+    description: A three character country code as defined in ISO 4217
+  Amount:
+    type: number
+    description: Monetary amount
+  PaymentCard_TypeCode:
+    type: string
+    minLength: 2
+    maxLength: 2
+    pattern: '^([A-Z]{2})$'
+    description: Payment card organization code
+  PaymentCard_Number:
+    type: string
+    minLength: 12
+    maxLength: 19
+    pattern: '^([0-9]{12,19}|X{1,15}[0-9]{4})$'
+    description: >-
+      Payment card number as defined in ISO/IEC 7812 or masked card number with
+      last four digits visible.
+  Code_Airline:
+    type: string
+    minLength: 2
+    maxLength: 3
+    pattern: '^([A-Z0-9]{2}[A-Z]?)$'
+    description: Airline code as defined by IATA (2 characters) or ICAO (3 characters).
+  FlightNumber:
+    type: string
+    minLength: 1
+    maxLength: 4
+    pattern: '^([0-9]{1,4})$'
+    description: Numeric part of the flight code as defined by IATA SISC
+  Code_AircraftType:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z0-9]{3})$'
+    description: A three character IATA aircraft type designator
+  Code_Airport:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z]{3})$'
+    description: IATA 3 character airport/city code
+  PhoneNumber:
+    type: string
+    minLength: 1
+    maxLength: 50
+    description: Phone number - no particular standard
+  Consent_Category:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z]{3})$'
+    description: Consent category as defined in SSW
+  Consent_CategoryType:
+    type: string
+    minLength: 2
+    maxLength: 2
+    pattern: '^([A-Z]{2})$'
+    description: Consent category type as defined in SSW
+  Hobby_Category:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z]{3})$'
+    description: Hobby category as defined in SSW
+  Hobby_Code:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z]{3})$'
+    description: Hobby code as defined in SSW
+  Code_Occupation:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z]{3})$'
+    description: Occupation code as defined in SSW
+  Code_Tour:
+    type: string
+    minLength: 1
+    maxLength: 15
+    pattern: '^([a-zA-Z0-9]{1,15})$'
+    description: >-
+      A tour code on a flight ticket is often a special code arranged between
+      the travel agency and the sales representative for a particular airline.
+  LoyaltyTierLevel:
+    type: object
+    description: Loyalty account tier level definition.
+    properties:
+      name:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Brand name as defined in the MM (Merchandising Manager) system.
+      number:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/int'
+        description: Loyalty tier level identifier
+      tag:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Code that identifies a loyalty account tier level
+    additionalProperties: false
+  Code_PassengerType:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([A-Z0-9]{3})$'
+    description: Passenger type code.
+  PointsConversionRatio:
+    type: number
+    description: >-
+      Conversion factor used to recalculate loyalty points/miles to monetary
+      amount and vice versa.
+  Enum_RoundingMode:
+    enum:
+      - UP
+      - DOWN
+      - CEILING
+      - FLOOR
+      - HALF_UP
+      - HALF_DOWN
+      - HALF_EVEN
+  Enum_ScalingMode:
+    enum:
+      - NEAREST_1
+      - NEAREST_10
+      - NEAREST_100
+      - NEAREST_1000
+  Enum_TaxType:
+    description: Tax application type
+    enum:
+      - FLAT
+      - PROPORTIONAL
+  PaymentCard_SecurityCode:
+    type: string
+    minLength: 3
+    maxLength: 4
+    pattern: '^([0-9]{3,4})$'
+    description: >-
+      A three- or four-digit value printed on the card or signature strip, but
+      not encoded on the magnetic stripe.
+  PaymentCard_ApprovalCode:
+    type: string
+    minLength: 3
+    maxLength: 6
+    description: >-
+      A code generated by the payment card authorization process as the part of
+      payment transaction process.
+  Credentials:
+    type: object
+    description: Username/password form of authentication.
+    properties:
+      username:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Username recognized by the system this credentials are used for.
+      password:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Password which matches the Username.
+    required:
+      - username
+      - password
+    additionalProperties: false
+  Deal_OfferName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Deal_PromotionCode:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Deal_DealName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  ConversionRatio:
+    description: Ratio used to calculate monetary equivalent of the points/miles.
+    properties:
+      value:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/PointsConversionRatio
+      minimumPoints:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/LoyaltyPoints'
+        description: Minimal number of points which must remain unconverted.
+    required:
+      - value
+    additionalProperties: false
+  String_From1to35:
+    type: string
+    minLength: 1
+    maxLength: 35
+  BinaryData:
+    description: Represents binary data (e.g.
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/binary'
+      contentType:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ContentType'
+        description: >-
+          Content type (also known as mime or media type) that specifies the
+          type of binary content.
+      name:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/LongString'
+        description: Optional name associated with binary data (e.g.
+    required:
+      - value
+      - contentType
+    additionalProperties: false
+  ContentType:
+    type: string
+    maxLength: 255
+    description: Content type (also known as mime or media type).
+  Enum_FlightScheduleStatus:
+    description: Flight status related to schedule.
+    enum:
+      - ON_TIME
+      - DELAYED
+      - EARLY
+      - CANCELLED
+  AircraftLease:
+    type: object
+    description: Provides details about aircraft lease.
+    properties:
+      lessorAirline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: An airline which provides aircraft to another airline.
+      marketingText:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: >-
+          Free text description which describes the relation between lessor and
+          lessee airlines e.g.
+    additionalProperties: false
+  SyntheticIdentifier:
+    type: string
+    minLength: 1
+    maxLength: 1000
+    description: >-
+      Artificially generated identifier required in rare cases to identify
+      entities when no other natural identifier can be selected.
+  Rate:
+    type: number
+    description: Generic type used for different types of recalculations.
+  ContextualCode:
+    description: >-
+      Represents code of unknown format accompanied with context representing
+      the domain the code comes from.
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+      context:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: This attribute describes the domain the code comes from.
+    required:
+      - value
+    additionalProperties: false
+  ClientIdentification:
+    type: object
+    description: Client identification data (e.g.
+    properties:
+      ipAddress:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: IP address
+    additionalProperties: false
+  Deal:
+    type: object
+    description: Represents discount details applicable to the price.
+    properties:
+      id:
+        type: string
+      type:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_DealType'
+        description: Type of the deal thi structure represents.
+      offerName:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Deal_OfferName'
+        description: Name of the offer that identifies the discount
+      promotionCode:
+        type: array
+        items:
+          $ref: >-
+            http://services.sabre.com/ssse/common/v15#/definitions/Deal_PromotionCode
+          description: Promotion code used when a request is processed.
+        maxItems: 99
+      amount:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Money'
+        description: >-
+          Regulatory price amount in the original currency in which the fare was
+          defined.
+      points:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Amount'
+        description: Discount represented in number of loyalty points
+      percentage:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Amount'
+        description: Price discount represented as a percent
+      conversionRatio:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ConversionRatio'
+        description: Details required to convert loyalty points/miles to a monetary amount.
+    required:
+      - type
+      - offerName
+    additionalProperties: false
+  Enum_TravelPortionType:
+    enum:
+      - ITINERARY
+      - ITINERARY_PART
+      - FLIGHT
+      - SEGMENT
+  Flight:
+    type: object
+    description: >-
+      Generic structure to represent flight/sector/flight leg/segment (different
+      names used for the same entity).
+    properties:
+      id:
+        type: string
+      airline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: Marketing airline code
+      flightNumber:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
+        description: Flight number provided by the marketing airline
+      departureAirport:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: Origin of the flight
+      departureTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: Departure date and time
+      arrivalAirport:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: Destination of the flight
+      arrivalTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: Arrival date and time
+      operatingAirline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: >-
+          Operating airline code, which could be different from the marketing
+          airline code
+      operatingAirlineName:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/MediumString'
+        description: >-
+          Operating airline name, which could differ from the marketing airline
+          name
+      operatingFlightNumber:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
+        description: >-
+          Flight number of the operating airline, which could be different from
+          the marketing airline
+      disclosureAirline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: >-
+          Code that identifies (discloses) the codeshare airline that operates
+          the flight.
+      equipment:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_AircraftType
+        description: Code identifying the type of equipment used for the flight
+    required:
+      - airline
+      - flightNumber
+      - departureAirport
+      - departureTime
+      - arrivalAirport
+      - arrivalTime
+    additionalProperties: false
+  FlightDetail:
+    type: object
+    properties:
+      id:
+        type: string
+      airline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: Marketing airline code
+      flightNumber:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
+        description: Flight number provided by the marketing airline
+      departureAirport:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: Origin of the flight
+      departureTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: Departure date and time
+      arrivalAirport:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: Destination of the flight
+      arrivalTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: Arrival date and time
+      operatingAirline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: >-
+          Operating airline code, which could be different from the marketing
+          airline code
+      operatingAirlineName:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/MediumString'
+        description: >-
+          Operating airline name, which could differ from the marketing airline
+          name
+      operatingFlightNumber:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
+        description: >-
+          Flight number of the operating airline, which could be different from
+          the marketing airline
+      disclosureAirline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: >-
+          Code that identifies (discloses) the codeshare airline that operates
+          the flight.
+      equipment:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_AircraftType
+        description: Code identifying the type of equipment used for the flight
+      flightStop:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightStop'
+          description: Represents break during multi leg flight e.g.
+        maxItems: 10
+      distance:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Mileage'
+        description: Distance of the flight in the selected unit of measure
+      span:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_FlightSpan'
+        description: Flight span e.g.
+      estimatedDepartureTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: >-
+          Estimated departure date and time, which is when the flight moves
+          under airport control
+      estimatedArrivalTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: >-
+          Estimated arrival date and time, which is when the flight moves under
+          airport control
+      departureFlightScheduleStatus:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_FlightScheduleStatus
+        description: Departure flight status as it relates to the schedule
+      arrivalFlightScheduleStatus:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_FlightScheduleStatus
+        description: Arrival flight status related to schedule.
+      boardingTime:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        description: Time the aircraft is scheduled for boarding
+      departureTerminal:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Terminal designated for boarding.
+      departureGate:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        description: Gate designated for boarding
+      departureCountry:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
+        description: Code identifying the departure country
+      arrivalCountry:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
+        description: Code identifying the arrival country
+      commuter:
+        type: boolean
+        description: Flag indicating whether this is a commuter flight.
+      aircraftLease:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/AircraftLease'
+        description: Details regarding the aircraft lease used to operate the flight.
+      changeOfGauge:
+        type: boolean
+        description: Change of equipment on multi-leg flights.
+      arrivalTerminal:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: Arrival terminal.
+      subjectToGovernmentApproval:
+        type: boolean
+        description: Flag indicating that this flight is subjected to government approval.
+    required:
+      - airline
+      - flightNumber
+      - departureAirport
+      - departureTime
+      - arrivalAirport
+      - arrivalTime
+    additionalProperties: false
+  Code_AncillaryGroup:
+    type: string
+    minLength: 1
+    maxLength: 3
+    description: Ancillary group as defined by ATPCO.
+  Code_AncillarySubCode:
+    type: string
+    minLength: 3
+    maxLength: 4
+    description: >-
+      The Sub Code is either an industry-defined or carrier-defined code
+      identifying a specific type of service.
+  Code_SSIM:
+    type: string
+    minLength: 1
+    description: >-
+      This field specifies the Standard Schedules Information Manual (SSIM)
+      code.
+  ConversionRules:
+    type: object
+    description: Details required to convert loyalty points/miles to monetary amount.
+    properties:
+      scalingMode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_ScalingMode
+        description: Scale indicating the calculated converted value
+      roundingMode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_RoundingMode
+        description: Rounding mode used when the converted value is calculated
+      minimumPoints:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/LoyaltyPoints'
+        description: Minimum points required for dynamic conversion
+    additionalProperties: false
+  Percent:
+    type: number
+    description: Percentage value.
+  Enum_Deck:
+    enum:
+      - MAIN
+      - UPPER
+      - OTHER
+  Deck:
+    description: Aircraft deck code.
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_Deck'
+      code:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Deck'
+        description: Custom deck code.
+    required:
+      - value
+    additionalProperties: false
+  Code_Deck:
+    type: string
+    minLength: 1
+    maxLength: 20
+    pattern: '^([A-Z_0-9]{1,20})$'
+    description: Deck code for multi-deck aircraft.
+  Segment:
+    type: object
+    description: Itinerary portion which links a flight(s) details and fare information.
+    properties:
+      id:
+        type: string
+      syntheticIdentifier:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/SyntheticIdentifier
+        description: >-
+          Artificially generated identifier required in rare cases to identify
+          segment.
+      flightDetail:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightDetail'
+          description: Flight details.
+        maxItems: 10
+      fareInfo:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FareInfo'
+          description: 'Fare information, which is usually a single element.'
+        maxItems: 10
+    required:
+      - flightDetail
+      - fareInfo
+    additionalProperties: false
+  Segments:
+    type: object
+    description: Used to group segments.
+    properties:
+      segment:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Segment'
+          description: List of segments
+        maxItems: 1000
+    required:
+      - segment
+    additionalProperties: false
+  ItineraryPart:
+    type: object
+    description: >-
+      Portion of travel which is seen by a passenger as a separate leg of
+      his/her overall travel in the context of selected flight fare.
+    properties:
+      id:
+        type: string
+      type:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_ItineraryPartType
+        description: Type of the itinerary part.
+      brand:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_FareBrand'
+        description: Fare brand code
+      segment:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Segment'
+          description: List of segments
+        maxItems: 10
+    required:
+      - segment
+    additionalProperties: false
+  ItineraryParts:
+    type: object
+    description: Used to group itinerary parts.
+    properties:
+      itineraryPart:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ItineraryPart'
+          description: >-
+            Portion of the itinerary to be searched for which a baggage price is
+            requested, or to identify any corresponding ancillaries.
+        maxItems: 1000
+    required:
+      - itineraryPart
+    additionalProperties: false
+  FareInfo:
+    type: object
+    description: 'Defines air fare attributes like booking class, fare basis code etc.'
+    properties:
+      id:
+        type: string
+      bookingClass:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_BookingClass
+        description: >-
+          Cabin booking class code, also known as RBD (Reservations/Booking
+          Designator), that contains one uppercase alpha character.
+      cabinClass:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_CabinClass'
+        description: 'Cabin class, such as ECONOMY.'
+      fareBasisCode:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: >-
+          Alpha or alphanumeric code that describes the fare type and its
+          applicable fare rules
+      brand:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_FareBrand'
+        description: Fare brand code
+      governingAirline:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        description: Governing carrier whose fares are used on a designated Fare Component.
+      amount:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Amount'
+        description: >-
+          Regulatory price amount in the original currency in which the fare was
+          defined.
+      type:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_FareType'
+        description: >-
+          Code identifying specific categories or groups of fares, such as
+          normal, special, refundable, non-refundable, exchangeable, etc.
+      atpcoTariff:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/short'
+        description: >-
+          ATPCO tariff number (geographically based) that indicates the fare
+          paid for the travel with the priced service is governed by a specific
+          rule.
+      atpcoRule:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        description: >-
+          Rule indicating that the fare paid for the travel (with the priced
+          service) is governed by a specific rule.
+      vendor:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FareVendor'
+        description: Entity by which given fare was filed e.g.
+      privateTariff:
+        type: boolean
+        description: >-
+          Flag indicating whether the fare paid for the travel with the priced
+          service is governed by a private or public ATP tariff.
+      discountCategory:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/DiscountCategories
+        description: >-
+          Numeric value specifying that the fare paid for the travel with the
+          priced service has been created from various categories.
+    required:
+      - bookingClass
+    additionalProperties: false
+  DiscountCategories:
+    type: string
+    pattern: ^(19|20|21|22|25|35)$
+  Code_FareType:
+    type: string
+    pattern: '^([A-Z0-9]{1,3})$'
+  FareVendor:
+    description: Represents entity by which given fare was filed.
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_FareVendor'
+      code:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Vendor'
+    required:
+      - value
+    additionalProperties: false
+  Code_Vendor:
+    type: string
+    minLength: 1
+    maxLength: 4
+    description: >-
+      Should have one of following values: ATP ATPCO SITA SITA SMFC SABRE
+      MYFARES/FARES WEB SERVICE - AIRLINES /PCC/* SABRE MYFARES/FARES WEB
+      SERVICE - SUBSCRIBERS
+  Enum_FareVendor:
+    enum:
+      - ATPCO
+      - SITA
+      - SABRE_MYFARES_AIRLINES
+      - SABRE_MYFARES_SUBSCRIBERS
+  Passenger:
+    type: object
+    description: Passenger for whom an operation is requested.
+    properties:
+      id:
+        type: string
+      type:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_PassengerType
+        description: Type of the passenger.
+      passengerIdentifier:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/PassengerIdentifier
+        description: Code that uniquely identifies the passenger
+      personName:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PersonName'
+        description: Passenger name
+      dateOfBirth:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        description: Date of birth.
+      loyaltyAccount:
+        type: array
+        items:
+          $ref: >-
+            http://services.sabre.com/ssse/common/v15#/definitions/LoyaltyAccount
+          description: Loyalty account details of the user who performs the Service request
+        maxItems: 5
+    additionalProperties: false
+  Passengers:
+    type: object
+    description: Used to group passengers.
+    properties:
+      passenger:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Passenger'
+          description: Passenger details
+        maxItems: 1000
+    required:
+      - passenger
+    additionalProperties: false
+  ItineraryPartRefs:
+    type: array
+    description: List of references to ItineraryPart.
+    items:
+      type: string
+  SegmentRefs:
+    type: array
+    description: List of references to Segment.
+    items:
+      type: string
+  TravelPortion:
+    type: object
+    description: Portion of the travel.
+    properties:
+      type:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_TravelPortionType
+        description: Type of the travel portion.
+      itineraryPartRefs:
+        type: array
+        items:
+          type: string
+          description: >-
+            Travel portion/discount that applies to each itinerary part in the
+            list.
+      segmentRefs:
+        type: array
+        items:
+          type: string
+          description: >-
+            Portion of travel, or segment of the passenger’s itinerary to which
+            a discount applies, such as a flight segment, baggage travel unit,
+            etc.
+    required:
+      - type
+    additionalProperties: false
+  PointOfSale:
+    type: object
+    description: >-
+      Service consumer Point of Sale (POS) details that can vary depending on
+      the distribution channel and technology used.
+    properties:
+      businessTransactionType:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_BusinessTransactionType
+        description: Type of the business transactions executed on the POS.
+      distributionChannel:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/DistributionChannel
+        description: Channel of product distribution.
+      identifier:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/MediumString'
+        description: POS identifier used for some distribution channels e.g.
+      country:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
+        description: 'PseudoCity code and default currency, if specified.'
+      agentIdentification:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/AgentIdentification
+        description: Identifies the travel agent who sends the request.
+      serverInfo:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ServerInfo'
+        description: Used in web distribution channel.
+      browserInfo:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/BrowserInfo'
+        description: Information regarding the web browser used to execute the Service
+    additionalProperties: false
+  ServerInfo:
+    type: object
+    description: Used in web payment.
+    properties:
+      hostName:
+        type: string
+      ipAddress:
+        type: string
+        description: IP address
+    additionalProperties: false
+  BrowserInfo:
+    type: object
+    description: Used in web payment.
+    properties:
+      sessionId:
+        type: string
+        description: Session ID
+      hostName:
+        type: string
+      ipAddress:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: IP address
+      httpHeader:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/HttpHeader'
+        maxItems: 50
+    required:
+      - sessionId
+    additionalProperties: false
+  Agent_DutyCode:
+    type: string
+    pattern: '^([1-9#@''*\-/])$'
+  Agent_Lniata:
+    type: string
+    maxLength: 6
+    pattern: '^([A-F0-9]+)$'
+  AgentIdentification:
+    type: object
+    description: Identifies the travel agent who sends the request.
+    properties:
+      pseudoCityCode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Agent_PseudoCityCode
+        description: >-
+          Identification code assigned to an office or agency by a reservation
+          system
+      personalCityCode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Agent_PersonalCityCode
+        description: City code identifier included in the Office Accounting Code
+      accountingCode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Agent_AccountingCode
+        description: Accounting Code identifier included in the Office Accounting Code.
+      officeCode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Agent_OfficeCode
+        description: Office Code part of Office Accounting Code.
+      sine:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        description: Identifies the agent or party within the requesting entity.
+      dutyCode:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Agent_DutyCode'
+        description: An authority code assigned to a requestor.
+      lniata:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Agent_Lniata'
+        description: LNIATA of the Console the agent signed into.
+    additionalProperties: false
+  Enum_DistributionChannel:
+    description: Distribution channels.
+    enum:
+      - WEB
+      - KIOSK
+      - AGENT
+      - OTHER
+  DistributionChannel:
+    properties:
+      value:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_DistributionChannel
+      name:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+    required:
+      - value
+    additionalProperties: false
+  Enum_BusinessTransactionType:
+    enum:
+      - B2C
+      - B2B
+  Enum_HttpHeaderName:
+    enum:
+      - CACHE_CONTROL
+      - CONTENT_TYPE
+      - COOKIE
+      - CONNECTION
+      - HOST
+      - ACCEPT_LANGUAGE
+      - CONTENT_LENGTH
+      - ACCEPT
+      - ORIGIN
+      - USER_AGENT
+      - REFERER
+      - ACCEPT_ENCODING
+      - ACCEPT_CHARSET
+      - OTHER
+  HttpHeader:
+    properties:
+      value:
+        type: string
+      name:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_HttpHeaderName
+      customName:
+        type: string
+    required:
+      - value
+      - name
+    additionalProperties: false
+  Agent_PersonalCityCode:
+    type: string
+    minLength: 3
+    maxLength: 4
+    pattern: '^([0-9A-Z]{3,4})$'
+    description: City code part of Office Accounting Code.
+  Agent_PseudoCityCode:
+    type: string
+    minLength: 1
+    maxLength: 16
+    description: >-
+      An identification code assigned to an office/agency by a reservation
+      system.
+  Agent_AccountingCode:
+    type: string
+    minLength: 2
+    maxLength: 3
+    pattern: '^([0-9a-zA-Z]{2,3})$'
+    description: Accounting Code identifier included in the Office Accounting Code
+  Agent_OfficeCode:
+    type: string
+    minLength: 7
+    maxLength: 7
+    pattern: '^([0-9]{7})$'
+    description: Office Code part of Office Accounting Code.
+  Enum_RetrievalContext:
+    description: >-
+      Retrieval options used to indicate which additional data should be
+      returned in addition to the standard set
+    enum:
+      - CHECK_IN
+      - BOOKING
+  Identifier_LoyaltyProgram:
+    type: string
+    minLength: 1
+    maxLength: 16
+    description: Identifier to indicate the company owner of the loyalty program.
+  Enum_DealType:
+    description: Defines types of custom deals defined in the system.
+    enum:
+      - DISCOUNT
+      - RISE
+  Code_SingleLetter:
+    type: string
+    minLength: 1
+    maxLength: 1
+    pattern: '^([A-Z]{1})$'
+    description: Single letter code
+  Code_AirlineAccounting:
+    type: string
+    minLength: 3
+    maxLength: 3
+    pattern: '^([0-9]{3})$'
+  Code_TicketCheckDigit:
+    type: string
+    minLength: 1
+    maxLength: 1
+    pattern: '^([0-6]{1})$'
+  TicketNumber:
+    type: object
+    description: Airline ticket number.
+    properties:
+      number:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        description: >-
+          Represents full ticket number including all its components: airline
+          accounting code, stock number and check digit.
+      airlineAccountingCode:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_AirlineAccounting
+        description: IATA assigned 3 digit number.
+      serialNumber:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        description: Serial number.
+      checkDigit:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_TicketCheckDigit
+        description: Ticket number check digit.
+    required:
+      - number
+    additionalProperties: false
+  NonNegativeInteger:
+    type: integer
+    minimum: 0
+    maximum: 2147483647
+  PositiveInteger:
+    type: integer
+    minimum: 1
+    maximum: 2147483647
+  SpecialServiceCodes:
+    type: array
+    description: List of special service codes.
+    items:
+      $ref: >-
+        http://services.sabre.com/ssse/common/v15#/definitions/Code_SpecialService
+  Size:
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/int'
+      unit:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_SizeUnit'
+    required:
+      - value
+      - unit
+    additionalProperties: false
+  Enum_SizeUnit:
+    enum:
+      - CENTIMETER
+      - INCH
+      - METER
+      - FEET
+  PassengerIdentifier:
+    type: object
+    properties:
+      id:
+        type: string
+      nameNumber:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Pnr_NameNumber'
+      nameAssociationId:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/MediumString'
+      syntheticIdentifier:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/SyntheticIdentifier
+    additionalProperties: false
+  Enum_AirExtraPaymentStatus:
+    enum:
+      - PENDING
+      - FULFILLED
+      - WAIVED
+      - VERIFICATION
+      - REJECTED
+      - UNSUPPORTED
+  AirExtraPaymentStatus:
+    properties:
+      value:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_AirExtraPaymentStatus
+      statusCode:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+    required:
+      - value
+    additionalProperties: false
+  Number_TicketCoupon:
+    type: string
+    minLength: 1
+    maxLength: 2
+    pattern: '^([0-9]{1,2})$'
+    description: Number of the ticket coupon linked to the flight.
+  Property:
+    description: Represent a single property (name/value pair).
+    properties:
+      value:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/MediumString'
+      name:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PropertyName'
+    required:
+      - value
+      - name
+    additionalProperties: false
+  PropertyName:
+    type: string
+    minLength: 1
+    maxLength: 128
+    description: Name of a property.
+  WeightValue:
+    type: number
+  Number_SequenceNumber:
+    type: string
+    minLength: 1
+    pattern: '^([0-9]{3,5})$'
+    description: 3-5 digits number including leading zeros
+  PropertyDefinition:
+    type: object
+    description: Definition of dynamic property.
+    properties:
+      name:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/MediumString'
+        description: A name of a property.
+      type:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_PropertyType
+        description: Type of a property.
+      min:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/integer'
+        description: A minimum value for given property.
+      max:
+        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/integer'
+        description: A maximum value of given property.
+      unit:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
+        description: A unit of given value.
+      optional:
+        type: boolean
+        description: Indicates if property is optional.
+      allowedValue:
+        type: array
+        items:
+          $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/MediumString'
+        maxItems: 100
+    required:
+      - name
+      - type
+    additionalProperties: false
+  Enum_PropertyType:
+    enum:
+      - INT
+      - DECIMAL
+      - TEXT
+      - ENUM
+  DynamicCurrencyConversion:
+    type: object
+    description: Offer of Dynamic Currency Conversion payment.
+    properties:
+      amount:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Money'
+        description: >-
+          Regulatory price amount in the original currency in which the fare was
+          defined.
+      originalAmount:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Money'
+        description: Original amount in terminal (POS) currency.
+      exchangeRateInfo:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/ExchangeRateInfo
+        description: Exchange rate details used for amount calculation.
+      supplierIdentifier:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/DynamicCurrencyConversionSupplierIdentification
+        description: Identification of the supplier of the DCC solution.
+    required:
+      - amount
+      - originalAmount
+      - exchangeRateInfo
+    additionalProperties: false
+  DynamicCurrencyConversionSupplierIdentification:
+    type: string
+    minLength: 1
+    maxLength: 8
+  ExchangeRateBasedOnName:
+    type: string
+    minLength: 1
+    maxLength: 32
+    description: >-
+      Name of the provider of the exchange rate used as a base for the final
+      exchange rate returned to the consumer.
+  ExchangeRateInfo:
+    type: object
+    properties:
+      rate:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Rate'
+        description: >-
+          Exchange rate used to calculate amount in payment card native currency
+          from the original POS currency.
+      margin:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Rate'
+        description: Applicable merchant margin rate.
+      basedOn:
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/ExchangeRateBasedOnName
+        description: >-
+          Name of the provider of the exchange rate used as a base for the final
+          exchange rate returned to the consumer.
+    required:
+      - rate
+    additionalProperties: false
+  Enum_FormOfPaymentType:
+    enum:
+      - PAYMENT_CARD
+      - LOYALTY
+      - EBANK
+      - GIFT_CARD
+      - VOUCHER
+      - CHECK
+      - CASH
+      - OFFLINE
+      - POLI
+      - SMART_LINK
+      - PAYPAL
+      - DIRECT_DEBIT
+      - OTHER
+  Code_SegmentStatus:
+    type: string
+    minLength: 2
+    maxLength: 2
+    pattern: '^([A-Z]{2})$'
+    description: Low level status code used by the reservation/checkin system.
+  Enum_PaymentCardType:
+    enum:
+      - CREDIT_CARD
+      - DEBIT_CARD
+  PriceModifier:
+    type: object
+    description: Price modifier containing applicable discount or markup.
+    properties:
+      markup:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+        description: Applicable markup.
+      discount:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+        description: Applicable discounts
+      originalBase:
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PriceElement'
+        description: >-
+          Generic type used to represent a price or a price component without
+          markup/discount.
+    required:
+      - originalBase
+    additionalProperties: false
