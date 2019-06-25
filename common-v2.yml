@@ -1,10 +1,38 @@
-id: ''
-$schema: 'http://json-schema.org/draft-04/schema#'
-title: CKI_Common
-cmm:
-  projectName: CKI Update passenger list
-  modelUnits:
-    - modelName: CKI_Common
+swagger: '2.0'
+info:
+  title: common-v2
+  version: "v2"
+  description: common-v2 
+  contact:
+    name: Contact Us
+    url: 'https://beta.developer.sabre.com/contact'
+x-project-id: common-v2
+host: api-crt.cert.havail.sabre.com
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v2/cki/common-v2:
+    post:
+      operationId: common-v2
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: |
+            Bad Request
+securityDefinitions:
+  oauth2_authentication:
+    type: oauth2
+    tokenUrl: 'https://api-crt.cert.havail.sabre.com/v2/auth/token'
+    flow: application
+    x-base64-encode-client-credentials: true
+security:
+  - oauth2_authentication: []
 definitions:
   WebServiceRQ:
     type: object
@@ -26,7 +54,7 @@ definitions:
       errors:
         type: array
         items:
-          $ref: '#/definitions/ErrorType'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/ErrorType'
           description: Error Result
     additionalProperties: false
   SSRCount:
@@ -34,10 +62,11 @@ definitions:
     description: Special Service counts
     properties:
       ssr:
-        $ref: '#/definitions/Enum_SSRCodes'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Enum_SSRCodes'
         description: SSR code / Edit Code
       count:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/NonNegativeInteger
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/NonNegativeInteger
         description: Count of passengers having the SSR assigned
     required:
       - ssr
@@ -75,7 +104,8 @@ definitions:
         description: Date/time when an error was generated.
       message:
         type: string
-        description: 'Human-readable representation of an error that can be used for
+        description: >-
+          Human-readable representation of an error that can be used for
           troubleshooting.
     additionalProperties: false
   Enum_ResponseStatus:
@@ -95,13 +125,13 @@ definitions:
     description: Representation of a Flight.
     properties:
       airline:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: Operating airline code
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: Flight number.
       departureAirport:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
         description: Origin of the flight.
       departureDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
@@ -117,19 +147,19 @@ definitions:
     description: FlightCriteria with optional Destination airport
     properties:
       airline:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: Operating airline code
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: Flight number.
       departureAirport:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
         description: Origin of the flight.
       departureDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: Local departure date.
       destinationAirport:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
         description: destination airport
     required:
       - airline
@@ -147,17 +177,17 @@ definitions:
     type: object
     properties:
       seatNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/SeatNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/SeatNumber'
     additionalProperties: false
   NameCriteria:
     type: object
     description: Allows to offload passengers by SSCI PassengerID and last name.
     properties:
       lastName:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: Passenger's last name
       passengerId:
-        $ref: '#/definitions/SsciPassengerId'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/SsciPassengerId'
         description: Unique reference to identify a passenger in Check-in system.
     required:
       - lastName
@@ -168,25 +198,25 @@ definitions:
     description: 'Represents data specific to passenger, not reservation.'
     properties:
       id:
-        $ref: '#/definitions/XmlId'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/XmlId'
       ssciPassengerId:
-        $ref: '#/definitions/SsciPassengerId'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/SsciPassengerId'
       personName:
         type: array
         items:
-          $ref: '#/definitions/PersonName'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/PersonName'
       emails:
         type: array
         items:
-          $ref: '#/definitions/EmailAddress'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/EmailAddress'
       phones:
         type: array
         items:
-          $ref: '#/definitions/Phone'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Phone'
       addresses:
         type: array
         items:
-          $ref: '#/definitions/Address'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Address'
       birthday:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
       maritalStatus:
@@ -196,35 +226,39 @@ definitions:
       documents:
         type: array
         items:
-          $ref: '#/definitions/Document'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Document'
       formsOfPayment:
         type: array
         items:
-          $ref: '#/definitions/PaymentCardWithBalance'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/PaymentCardWithBalance
       loyaltyAccounts:
         type: array
         items:
-          $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/LoyaltyAccount
+          $ref: >-
+            http://services.sabre.com/ssse/common/v15#/definitions/LoyaltyAccount
       preferences:
         type: array
         items:
-          $ref: '#/definitions/AirlinePreference'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/AirlinePreference
       socialMediaAccounts:
         type: array
         items:
-          $ref: '#/definitions/SocialMediaAccount'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/SocialMediaAccount
       ssrs:
         type: array
         items:
-          $ref: '#/definitions/Ssr'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Ssr'
       osis:
         type: array
         items:
-          $ref: '#/definitions/Osi'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Osi'
       remarks:
         type: array
         items:
-          $ref: '#/definitions/Remark'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Remark'
     required:
       - personName
     additionalProperties: false
@@ -236,7 +270,7 @@ definitions:
       text:
         type: string
       type:
-        $ref: '#/definitions/FactsType'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/FactsType'
       serviceTypeCode:
         type: string
     additionalProperties: false
@@ -279,35 +313,38 @@ definitions:
       id:
         type: string
       type:
-        $ref: '#/definitions/DocumentType'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/DocumentType'
         description: Type of the document
       number:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
         description: Document number
       personName:
-        $ref: '#/definitions/PersonName'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/PersonName'
         description: Passenger name
       nationality:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_Country_Extended
         description: Nationality country code
       countryOfBirth:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
         description: The code of country where the person was born.
       placeOfBirth:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/String_From1to35
-        description: 'This element contains unstructured details about person's place of
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/String_From1to35
+        description: >-
+          This element contains unstructured details about person's place of
           birth.
       dateOfBirth:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: Date of birth if different than in containing structure
       issuingCountry:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
         description: The code of country which issued the document
       applicableCountry:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
         description: The code of country which the document is applicable for e.g.
       issuingPlace:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: The place where the document has been issued
       issueDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
@@ -316,7 +353,7 @@ definitions:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: Date when the document will expire
       gender:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Enum_Gender'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Enum_Gender'
         description: Gender as provided in the document
     required:
       - type
@@ -326,9 +363,9 @@ definitions:
     description: A generic type used to represent email address.
     properties:
       value:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Email'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Email'
       type:
-        $ref: '#/definitions/EmailType'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/EmailType'
         description: Indicates the type of the email.
     required:
       - value
@@ -348,19 +385,20 @@ definitions:
     description: A genetic type used to represent phone number
     properties:
       type:
-        $ref: '#/definitions/PhoneType'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/PhoneType'
         description: Type of the phone number e.g.
       countryCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Phone_Country
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_Phone_Country
         description: Country code portion of the number.
       areaCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Phone_Area'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Phone_Area'
         description: Area code portion of the number
       number:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PhoneNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PhoneNumber'
         description: The actual number
       extension:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PhoneNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/PhoneNumber'
         description: Optional extension suffix
     required:
       - number
@@ -382,7 +420,7 @@ definitions:
     description: A genetic type used to represent AE
     properties:
       aeStatus:
-        $ref: '#/definitions/AEStatus'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/AEStatus'
         description: Air Extra bag status
       value:
         type: string
@@ -403,31 +441,31 @@ definitions:
       id:
         type: string
       type:
-        $ref: '#/definitions/AddressType'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/AddressType'
         description: The type of a address.
       companyName:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: Name of the company.
       personName:
-        $ref: '#/definitions/PersonName'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/PersonName'
         description: Passenger name
       street1:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: Street part of an address.
       street2:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: Additional street part which might be required in some cases
       postalCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Postal'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Postal'
         description: Postal code.
       country:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
         description: ISO 3166-1 alpha-2 country codes
       city:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: City name
       stateProvince:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: State or province.
     additionalProperties: false
   AddressType:
@@ -480,22 +518,22 @@ definitions:
     type: object
     properties:
       prefix:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
         description: 'Prefix placed before the passenger name, such as Mr., Dr., Ms, etc.'
       first:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: First name
       middle:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: Optional middle name
       last:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: Last name
       suffix:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
         description: Optional suffix
       raw:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: Passenger surname as stored in the system.
       preferredFirstName:
         type: string
@@ -513,22 +551,26 @@ definitions:
       id:
         type: string
       typeCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_TypeCode
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/PaymentCard_TypeCode
         description: The code of the card e.g.
       cardType:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Enum_PaymentCardType
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Enum_PaymentCardType
         description: Type of Payment Card whether CreditCard or DebitCard
       number:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_Number
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/PaymentCard_Number
         description: The actual payment card number
       nameOnCard:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/ShortString'
         description: Owner name on the card
       expirationDetails:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_ExpirationDetails
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/PaymentCard_ExpirationDetails
         description: Month and year until the card is valid
       balance:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Money'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Money'
     required:
       - typeCode
       - number
@@ -537,35 +579,39 @@ definitions:
     type: object
     properties:
       airline:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
       airportPreferences:
         type: array
         items:
-          $ref: '#/definitions/AirportPreference'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/AirportPreference
       seatPreferences:
         type: array
         items:
-          $ref: '#/definitions/SeatPreference'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/SeatPreference'
       cabinPreferences:
         type: array
         items:
-          $ref: '#/definitions/CabinPreference'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/CabinPreference'
       mealPreferences:
         type: array
         items:
-          $ref: '#/definitions/MealPreference'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/MealPreference'
       upgradePreferences:
         type: array
         items:
-          $ref: '#/definitions/UpgradePreference'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/UpgradePreference
       preferredAirlines:
         type: array
         items:
-          $ref: '#/definitions/PreferredAirline'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/PreferredAirline
       preferredAggregators:
         type: array
         items:
-          $ref: '#/definitions/PreferredAggregator'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/PreferredAggregator
     additionalProperties: false
   Preference:
     type: object
@@ -583,7 +629,7 @@ definitions:
       information:
         type: string
       airportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
       location:
         type: string
     additionalProperties: false
@@ -677,7 +723,7 @@ definitions:
       includeDigitalSignatureData:
         type: boolean
       printFormat:
-        $ref: '#/definitions/PrintFormatEnum'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/PrintFormatEnum'
     additionalProperties: false
   PrintFormatEnum:
     enum:
@@ -730,9 +776,9 @@ definitions:
   PNRLocator:
     properties:
       value:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/RecordLocator'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/RecordLocator'
       nameAssociationId:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
         description: PNR name association ID
     required:
       - value
@@ -747,13 +793,16 @@ definitions:
     type: object
     properties:
       lastName:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to30
         description: Passenger's Last Name
       firstName:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to30
         description: Passenger's First Name
       middleName:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to30
         description: Passenger's Middle Name
     additionalProperties: false
   Enum_SSCI_Gender:
@@ -830,7 +879,8 @@ definitions:
     properties:
       type:
         type: string
-        description: 'Error result type: Either of ValidationError, ApplicationError,
+        description: >-
+          Error result type: Either of ValidationError, ApplicationError,
           BusinesslogicError
       code:
         type: string
@@ -840,7 +890,8 @@ definitions:
         description: A short string representation of an error.
       source:
         type: string
-        description: 'a short text represing the System where this error occurred, like CKI,
+        description: >-
+          a short text represing the System where this error occurred, like CKI,
           HOST, PNR, ANCS etcc
     additionalProperties: false
   Enum_ActionType:
@@ -865,14 +916,15 @@ definitions:
     description: Passenger's journey detail
     properties:
       airlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: IATA Airline designator.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: Flight number
       departureAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
-        description: 'Origin airport code of the flight or Airport code from where the
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: >-
+          Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
@@ -919,7 +971,7 @@ definitions:
       value:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/integer'
       unit:
-        $ref: '#/definitions/WeightUnitCode'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/WeightUnitCode'
         description: Unit of measure
     required:
       - value
@@ -935,7 +987,7 @@ definitions:
       value:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/integer'
       unit:
-        $ref: '#/definitions/LengthUnitCode'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/LengthUnitCode'
         description: bag length unit codes.
     required:
       - value
@@ -957,14 +1009,15 @@ definitions:
     description: Specifies the baggage type and its associated reason code if applicable
     properties:
       bagTypeCode:
-        $ref: '#/definitions/UpperCaseAlphaLength1'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaLength1
       description:
         type: string
         description: Bag type description
       reasonList:
         type: array
         items:
-          $ref: '#/definitions/Reason'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Reason'
           description: Details for Reason code
         maxItems: 25
     additionalProperties: false
@@ -978,11 +1031,11 @@ definitions:
       bagTagList:
         type: array
         items:
-          $ref: '#/definitions/BagTag'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BagTag'
           description: Specifies bag tag details.
         maxItems: 99
       totalWeight:
-        $ref: '#/definitions/Weight'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Weight'
         description: Specifies the total baggage weight.
     additionalProperties: false
   BagTag:
@@ -991,21 +1044,22 @@ definitions:
     properties:
       bagTagNumber:
         type: string
-        description: 'Bag tag serial number.It can be 6 digit or 10 digit number, based on
+        description: >-
+          Bag tag serial number.It can be 6 digit or 10 digit number, based on
           the carrier setting
       weight:
-        $ref: '#/definitions/Weight'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Weight'
         description: Specifies the weight of the bag.
       bagTypeList:
         type: array
         items:
-          $ref: '#/definitions/BagTypeDetails'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BagTypeDetails'
           description: List of bag tag types.
         maxItems: 99
       aeList:
         type: array
         items:
-          $ref: '#/definitions/AEDetails'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/AEDetails'
           description: List of air extras to be associated to a bag
         maxItems: 99
     additionalProperties: false
@@ -1037,21 +1091,23 @@ definitions:
     description: Passenger's journey detail
     properties:
       airlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: IATA Airline designator.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: Flight number
       departureAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
-        description: 'Origin airport code of the flight or Airport code from where the
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: >-
+          Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: Local departure date of the flight.
       arrivalAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
-        description: 'Destination airport code of the flight or Airport code where the
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: >-
+          Destination airport code of the flight or Airport code where the
           flight is arriving
     required:
       - airlineCode
@@ -1064,27 +1120,29 @@ definitions:
     description: Flight Info
     properties:
       airlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: IATA Airline designator.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: Flight number
       departureAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
-        description: 'Origin airport code of the flight or Airport code from where the
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: >-
+          Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: Local departure date of the flight.
       arrivalAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
-        description: 'Destination airport code of the flight or Airport code where the
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        description: >-
+          Destination airport code of the flight or Airport code where the
           flight is arriving
       departureGate:
-        $ref: '#/definitions/GateName'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/GateName'
         description: flight departure gate
       arrivalGate:
-        $ref: '#/definitions/GateName'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/GateName'
         description: flight arrival gate
     required:
       - airlineCode
@@ -1216,7 +1274,7 @@ definitions:
         type: string
         description: Code that is required to permit the passenger to checkin
       detailStatus:
-        $ref: '#/definitions/Enum_DetailStatus'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Enum_DetailStatus'
         description: 'Status State - ValidationRequired, ValidationFailed, WithDOCRequired'
       infoText:
         type: string
@@ -1235,7 +1293,8 @@ definitions:
       editCodeAttributeList:
         type: array
         items:
-          $ref: '#/definitions/EditCodeAttributeType'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/EditCodeAttributeType
           description: Edit code Attribute Complex type
         maxItems: 99
     additionalProperties: false
@@ -1265,7 +1324,8 @@ definitions:
       timaticCountryInfoList:
         type: array
         items:
-          $ref: '#/definitions/TimaticCountryInfoType'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/TimaticCountryInfoType
           description: Country code for the timatic detail
         maxItems: 99
     additionalProperties: false
@@ -1284,7 +1344,7 @@ definitions:
       sectionInfoList:
         type: array
         items:
-          $ref: '#/definitions/SectionInfoType'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/SectionInfoType'
           description: Section Info from Timatic response
         maxItems: 99
     additionalProperties: false
@@ -1304,7 +1364,8 @@ definitions:
       subSectionInfoList:
         type: array
         items:
-          $ref: '#/definitions/SubSectionInfoType'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/SubSectionInfoType
           description: Timatic Subsection info
         maxItems: 99
     additionalProperties: false
@@ -1345,22 +1406,24 @@ definitions:
     description: Generic Bag Tag print data XML
     properties:
       passengerName:
-        $ref: '#/definitions/PassengerName'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/PassengerName'
         description: 'Passenger complete name information to whom, the bags belongs'
       reservation:
-        $ref: '#/definitions/Reservation'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Reservation'
         description: Reservation details of the passenger who checks the bag
       agentInfo:
-        $ref: '#/definitions/Agent'
-        description: 'This is Issuing Agent information, who checks in the bags, on behalf
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Agent'
+        description: >-
+          This is Issuing Agent information, who checks in the bags, on behalf
           of the passenger, and this information also represents the point of
           sale
       flightInfo:
-        $ref: '#/definitions/BTFlightInfo'
-        description: 'Operating airline, and flight detail information on which , the
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BTFlightInfo'
+        description: >-
+          Operating airline, and flight detail information on which , the
           passenger is travelling and checks in the bag
       baggageInfo:
-        $ref: '#/definitions/BTBagDetails'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BTBagDetails'
         description: List of Bag Specific information that would be printed on each bag tag
     additionalProperties: false
   Reservation:
@@ -1371,7 +1434,8 @@ definitions:
         description: Aircraft Cabin class on which the passenger is travelling
       bookingClassCode:
         type: string
-        description: 'Reservation Booking designator or selling class as booked in the
+        description: >-
+          Reservation Booking designator or selling class as booked in the
           passenger's itinerary
       pnrLocator:
         type: string
@@ -1416,10 +1480,10 @@ definitions:
         type: string
         description: Airline name in which the passenger is travelling
       operatingAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: IATA Airline code.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: Service number for the flight.
       departureDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
@@ -1442,10 +1506,10 @@ definitions:
         type: string
         description: Airline name in which the passenger is travelling
       operatingAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: IATA Airline code.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: Service number for the flight.
       departureDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
@@ -1460,13 +1524,13 @@ definitions:
         type: string
         description: Estimated Departure Time.
       arrivalAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
         description: IATA City code of the transfer segment or destination
       arrivalAirportName:
         type: string
         description: IATA city name of the transfer segment or destination
       arrivalAirportCountryCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Country'
         description: ISO country code of the transfer segment or destination
     additionalProperties: false
   BTBagDetails:
@@ -1484,7 +1548,7 @@ definitions:
       bagList:
         type: array
         items:
-          $ref: '#/definitions/BagDetails'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BagDetails'
           description: Bag specific information printed on the tag
         maxItems: 99
     additionalProperties: false
@@ -1492,15 +1556,15 @@ definitions:
     type: object
     properties:
       individualWeightAndUnit:
-        $ref: '#/definitions/Weight'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Weight'
         description: individual weight and its unit of measure
       bagTag:
-        $ref: '#/definitions/BTBagTag'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BTBagTag'
         description: 10 or 6 digit Bag tag number and its issuance details
       bagTextList:
         type: array
         items:
-          $ref: '#/definitions/BagText'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BagText'
           description: Printable Description Text on Bag Tag
         maxItems: 25
       specialServiceTypeList:
@@ -1511,19 +1575,22 @@ definitions:
         maxItems: 99
       relativeBagSequenceNo:
         type: string
-        description: 'Baggage tag sequence number relative to the total bags checked in that
+        description: >-
+          Baggage tag sequence number relative to the total bags checked in that
           time
       bagTypeList:
         type: array
         items:
-          $ref: '#/definitions/BTBagTypeDetails'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/BTBagTypeDetails
           description: 'Bag tag type text, optionally with a reason for issuance'
         maxItems: 25
       bagRouteList:
         type: array
         items:
-          $ref: '#/definitions/BagRouteDetails'
-          description: '  Destination and connecting flight information thru transfer segments
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BagRouteDetails'
+          description: >-
+            Destination and connecting flight information thru transfer segments
             for the bag route
         maxItems: 99
     additionalProperties: false
@@ -1534,7 +1601,7 @@ definitions:
         type: string
         description: 10 digit Bag tag number
       issuedAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: Bag Tag Issuing Airline code
       issueDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
@@ -1543,7 +1610,7 @@ definitions:
         type: string
         description: Time of bag tag issue
       parseBagTagNumber:
-        $ref: '#/definitions/ParseBagTagNumber'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/ParseBagTagNumber'
         description: 10 digit bag tag number and its details
     additionalProperties: false
   ParseBagTagNumber:
@@ -1555,7 +1622,8 @@ definitions:
         description: 6 digit bag tag number
       indexNumber:
         type: string
-        description: 'Bag Tag index number based upon Origin , destination or Interline or
+        description: >-
+          Bag Tag index number based upon Origin , destination or Interline or
           Manual Bag Tag
       airlineCode:
         type: string
@@ -1568,7 +1636,8 @@ definitions:
         type: string
       textType:
         type: string
-        description: 'Represents the type of text that will be presented on the bag tag such
+        description: >-
+          Represents the type of text that will be presented on the bag tag such
           as Selectee, Quick Transfer Bags
     required:
       - value
@@ -1577,7 +1646,8 @@ definitions:
     type: object
     properties:
       bagTypeCode:
-        $ref: '#/definitions/UpperCaseAlphaLength1
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaLength1
         description: bag type code
       description:
         type: string
@@ -1585,7 +1655,7 @@ definitions:
       reasonList:
         type: array
         items:
-          $ref: '#/definitions/Reason'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Reason'
           description: Details for Reason code
         maxItems: 25
     additionalProperties: false
@@ -1593,16 +1663,19 @@ definitions:
     type: object
     properties:
       flightInfo:
-        $ref: '#/definitions/BTBagRouteFlightInfo'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/BTBagRouteFlightInfo
         description: Bag tag route segment flight information
       checkinSequenceNumber:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/int'
-        description: 'passenger check in sequence Number relative to other passengeres
+        description: >-
+          passenger check in sequence Number relative to other passengeres
           checked-in on the flight
       operatingTypeAirlineList:
         type: array
         items:
-          $ref: '#/definitions/BTOperatingTypeAirlineList'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/BTOperatingTypeAirlineList
           description: Operating ailine aircraft's Wetlease or Commuter detail information
         maxItems: 9
       airportZoneGroup:
@@ -1613,10 +1686,12 @@ definitions:
     type: object
     properties:
       wetLeaseAirline:
-        $ref: '#/definitions/BTWetLeaseAirlineInfo'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/BTWetLeaseAirlineInfo
         description: Wetlease Operating Airline information
       commuterAirline:
-        $ref: '#/definitions/BTCommuterAirlineInfo'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/BTCommuterAirlineInfo
         description: Commuter Airline Information
     additionalProperties: false
   BTWetLeaseAirlineInfo:
@@ -1636,7 +1711,7 @@ definitions:
     type: object
     properties:
       commuterAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: Commuter Airline code
       commuterAirlineName:
         type: string
@@ -1646,7 +1721,8 @@ definitions:
     type: object
     properties:
       bagTypeCode:
-        $ref: '#/definitions/UpperCaseAlphaLength1'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaLength1
     required:
       - bagTypeCode
     additionalProperties: false
@@ -1662,14 +1738,14 @@ definitions:
       firstName:
         type: string
       agentInfo:
-        $ref: '#/definitions/BPSAgentInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSAgentInfo'
       pnrLocator:
         type: string
         description: PNR Locator
       barCodeInfo:
-        $ref: '#/definitions/BPSBarCodeInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSBarCodeInfo'
       boardingPassInfo:
-        $ref: '#/definitions/BPSDetails'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSDetails'
     additionalProperties: false
   BPSAgentInfo:
     type: object
@@ -1700,7 +1776,7 @@ definitions:
         type: string
         description: Barcode Data
       digitalSignature:
-        $ref: '#/definitions/DigiSignDetails'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/DigiSignDetails'
     additionalProperties: false
   DigiSignDetails:
     type: object
@@ -1740,7 +1816,7 @@ definitions:
         type: string
         description: Marketing Airline Name
       departureInfo:
-        $ref: '#/definitions/BPSDepartureInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSDepartureInfo'
       boardingTime:
         type: string
         description: Boarding Time HHMMSS format
@@ -1759,7 +1835,7 @@ definitions:
       clockType:
         type: string
       arrivalInfo:
-        $ref: '#/definitions/BPSArrivalInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSArrivalInfo'
       cabinClassCode:
         type: string
         description: Passenger's Cabin
@@ -1778,7 +1854,7 @@ definitions:
       seatInfoList:
         type: array
         items:
-          $ref: '#/definitions/SeatDetails'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/SeatDetails'
           description: Seat List
         maxItems: 2
       extraSeatDetails:
@@ -1788,19 +1864,20 @@ definitions:
         type: string
         description: CodeShare Text
       wetLeaseInfo:
-        $ref: '#/definitions/BPSWetLeaseInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSWetLeaseInfo'
       commuterInfo:
-        $ref: '#/definitions/BPSCommuterInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSCommuterInfo'
       frequentFlyerInfo:
-        $ref: '#/definitions/BPSFrequentTravelInfo'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/BPSFrequentTravelInfo
       baggageInfo:
-        $ref: '#/definitions/BPSBaggageInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSBaggageInfo'
       priorityCode:
         type: string
       seniorityDate:
         type: string
       securityText:
-        $ref: '#/definitions/BPSSecurityInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSSecurityInfo'
       groupZoneText:
         type: string
         description: Group or Zone Description
@@ -1811,20 +1888,22 @@ definitions:
           description: SSR or EDIT LIST
         maxItems: 99
       vcrDetails:
-        $ref: '#/definitions/BPSVcrInfo'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSVcrInfo'
       entitlementTextList:
         type: array
         items:
-          $ref: '#/definitions/BPSEntitlement'
-          description: '  Group for: SpeedText ; PingTip ; SpeedText ; EvenMoreSpeedText ;
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSEntitlement'
+          description: >-
+            Group for: SpeedText ; PingTip ; SpeedText ; EvenMoreSpeedText ;
             ExclusiveWaitingArea ; PriorityAccessText ;SkyPriorityText ;
             LoungeAccess
         maxItems: 99
       genericTextList:
         type: array
         items:
-          $ref: '#/definitions/BPSTextGroup'
-          description: '  Group for: TicketText ; FlightCouponText ; CarryOnText ; InfantText
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BPSTextGroup'
+          description: >-
+            Group for: TicketText ; FlightCouponText ; CarryOnText ; InfantText
             ;  ChildText ; THRUText ; PremiumText ;  ExitText ; TBOText ;
             TBOCityCode ; BrandedFare
         maxItems: 99
@@ -1896,9 +1975,9 @@ definitions:
     type: object
     properties:
       totalBagWeight:
-        $ref: '#/definitions/Weight'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Weight'
       totalCarryOnWeight:
-        $ref: '#/definitions/Weight'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Weight'
       bagTagNumberList:
         type: array
         items:
@@ -1927,7 +2006,8 @@ definitions:
       textList:
         type: array
         items:
-          $ref: '#/definitions/BPSSecurityInfoText'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/BPSSecurityInfoText
         maxItems: 99
     additionalProperties: false
   BPSSecurityInfoText:
@@ -2112,16 +2192,16 @@ definitions:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/short'
         description: Segment no.
       operatingAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: operating airline code
       operatingFlightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: operating flight number
       marketingAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
         description: marketing airline code
       marketingFlightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
         description: marketing flight number
       thirdPartyGroundHandled:
         type: boolean
@@ -2132,90 +2212,100 @@ definitions:
         description: flag to indicate that this is an IATCI flight
         default: 'false'
       departureAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
         description: flight departure city code
       destinationAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
         description: flight arrival city code
       departureDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: flight departure date
       editCodeList:
-        $ref: '#/definitions/EditCodeList'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/EditCodeList'
         description: passenger's list of edit codes
       travelDocumentList:
         type: array
         items:
-          $ref: '#/definitions/TravelDocumentInfo'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/TravelDocumentInfo
           description: List of Travel Documents
         maxItems: 99
       destinationAddressList:
         type: array
         items:
-          $ref: '#/definitions/AddressInfo'
-          description: '  address for Destination, it is mandatory in case of action EDIT, not
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/AddressInfo'
+          description: >-
+            address for Destination, it is mandatory in case of action EDIT, not
             needed for action DELETE
         maxItems: 9
       residentAddressList:
         type: array
         items:
-          $ref: '#/definitions/AddressInfo'
-          description: '  address for Residence, it is mandatory in case of action EDIT, not
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/AddressInfo'
+          description: >-
+            address for Residence, it is mandatory in case of action EDIT, not
             needed for action DELETE
         maxItems: 9
       visaList:
         type: array
         items:
-          $ref: '#/definitions/VisaType'
-          description: '  address for Residence, it is mandatory in case of action EDIT, not
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/VisaType'
+          description: >-
+            address for Residence, it is mandatory in case of action EDIT, not
             needed for action DELETE
         maxItems: 99
       knownTravelerList:
         type: array
         items:
-          $ref: '#/definitions/OtherDocumentType'
-          description: '  address for Residence, it is mandatory in case of action EDIT, not
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/OtherDocumentType
+          description: >-
+            address for Residence, it is mandatory in case of action EDIT, not
             needed for action DELETE
         maxItems: 9
       redressList:
         type: array
         items:
-          $ref: '#/definitions/OtherDocumentType'
-          description: '  address for Residence, it is mandatory in case of action EDIT, not
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/OtherDocumentType
+          description: >-
+            address for Residence, it is mandatory in case of action EDIT, not
             needed for action DELETE
         maxItems: 9
       contactInfoList:
         type: array
         items:
-          $ref: '#/definitions/PassengerContactType'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/PassengerContactType
           description: Passenger Contact
         maxItems: 99
       hajList:
         type: array
         items:
-          $ref: '#/definitions/HajAndUmrhType'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/HajAndUmrhType'
           description: Haj
         maxItems: 2
       umrhList:
         type: array
         items:
-          $ref: '#/definitions/HajAndUmrhType'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/HajAndUmrhType'
           description: umrh
         maxItems: 2
       ifetList:
         type: array
         items:
-          $ref: '#/definitions/IfetType'
+          $ref: 'http://services.sabre.com/cki/common/v2#/definitions/IfetType'
           description: Infant Vcr details
         maxItems: 99
       requiredInfoList:
         type: array
         items:
-          $ref: '#/definitions/RequiredInfoType'
+          $ref: >-
+            http://services.sabre.com/cki/common/v2#/definitions/RequiredInfoType
           description: CheckIn Requirements
         maxItems: 99
       frequentFlyer:
-        $ref: '#/definitions/FrequentFlyerType'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/FrequentFlyerType'
         description: Frequent Flyer information
     additionalProperties: false
   FrequentFlyerType:
@@ -2275,10 +2365,12 @@ definitions:
         type: boolean
         description: infant indicator
       number:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to30
         description: Document/Redress number
       countryCode:
-        $ref: '#/definitions/UpperCaseAlphaLength2to3'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaLength2to3
         description: applicable country code
     additionalProperties: false
   PassengerContactType:
@@ -2287,32 +2379,22 @@ definitions:
       refusedByPassenger:
         type: boolean
       contactData:
-        $ref: '#/definitions/ContactType'
-    allOf:
-      - oneOf:
-          - oneOf:
-              - required:
-                  - refusedByPassenger
-              - required:
-                  - contactData
-          - not:
-              anyOf:
-                - required:
-                    - refusedByPassenger
-                - required:
-                    - contactData
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/ContactType'
     additionalProperties: false
   ContactType:
     type: object
     properties:
       name:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to30
         description: name of the contact person
       contactDetails:
-        $ref: '#/definitions/StringLength1to255'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/StringLength1to255
         description: phone number along with country code
       relatedData:
-        $ref: '#/definitions/StringLength1to255'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/StringLength1to255
         description: other necessary details about the contact
     required:
       - name
@@ -2326,13 +2408,16 @@ definitions:
         description: infant indicator
         default: 'false'
       streetAddress:
-        $ref: '#/definitions/AlphaNumericSpaceLength0to35'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/AlphaNumericSpaceLength0to35
         description: StreetAdress
       city:
-        $ref: '#/definitions/AlphaNumericSpaceLength0to35'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/AlphaNumericSpaceLength0to35
         description: City
       state:
-        $ref: '#/definitions/AlphaNumericSpaceLength0to35'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/AlphaNumericSpaceLength0to35
         description: StateProvince
       countryCode:
         type: string
@@ -2350,20 +2435,25 @@ definitions:
         description: infant indicator
         default: 'false'
       placeOfBirth:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to35'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to35
         description: Passenger's place of birth
       number:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to30
         description: Visa number
       issuingCity:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to35'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to35
         description: City where visa was issued
       dateOfIssue:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: 'Date of visa issuance, Format: YYYY-MM-DD'
       countryCode:
-        $ref: '#/definitions/UpperCaseAlphaLength2to3'
-        description: 'Visa applicable country code, Format : 2 or 3 character IATA country
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaLength2to3
+        description: >-
+          Visa applicable country code, Format : 2 or 3 character IATA country
           code
     additionalProperties: false
   TravelDocumentInfo:
@@ -2375,37 +2465,46 @@ definitions:
         description: infant indicator
         default: 'false'
       type:
-        $ref: '#/definitions/Passenger_DocumentType'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/Passenger_DocumentType
         description: Document type; lookup enum for valid types
       number:
-        $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to20'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaSpaceNumericLength1to20
         description: Document number
       dateOfBirth:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: 'Date of Birth, Format: YYYY-MM-DD'
       personName:
-        $ref: '#/definitions/SsciPersonName'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/SsciPersonName'
         description: Passenger Name details
       nationality:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended
-        description: 'Passenger's nationality mentioned in the Document, Format : 2 or 3
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_Country_Extended
+        description: >-
+          Passenger's nationality mentioned in the Document, Format : 2 or 3
           character IATA country code
       gender:
-        $ref: '#/definitions/Enum_SSCI_Gender'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Enum_SSCI_Gender'
         description: Passenger's gender.
       issuingCountryCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended
-        description: 'Document Issuing country code, Format : 2 or 3 character IATA country
+        $ref: >-
+          http://services.sabre.com/ssse/common/v15#/definitions/Code_Country_Extended
+        description: >-
+          Document Issuing country code, Format : 2 or 3 character IATA country
           code
       dateOfExpiration:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: 'Document expiration date, Format: YYYY-MM-DD'
       swipeIndicator:
-        $ref: '#/definitions/SwipeIndicatorType'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/SwipeIndicatorType
         description: Document's swipe indicator
       multinamePassportHolder:
-        $ref: '#/definitions/MultinamePassportHolderType'
-        description: 'Indicator for multi-name passport holder, only valid with PASSPORT
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/MultinamePassportHolderType
+        description: >-
+          Indicator for multi-name passport holder, only valid with PASSPORT
           document type
     additionalProperties: false
   TimaticDocumentType:
@@ -2419,19 +2518,21 @@ definitions:
         description: infant indicator
         default: 'false'
       documentTypeId:
-        $ref: '#/definitions/UpperCaseStringLength1to35'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseStringLength1to35
         description: Required Document Type number
       residencyDocument:
-        $ref: '#/definitions/ResidencyDocumentType'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/ResidencyDocumentType
         description: Timatic document type
       stayType:
-        $ref: '#/definitions/Enum_StayType'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Enum_StayType'
         description: Timatic stay type
       returnDate:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: Timatic return date.2017-08-14
       visa:
-        $ref: '#/definitions/Enum_VisaVerified'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/Enum_VisaVerified'
         description: Visa Verified indicator
     additionalProperties: false
   TimaticDocumentTypeRS:
@@ -2448,7 +2549,8 @@ definitions:
         type: string
         description: Required Document Type number
       residencyDocument:
-        $ref: '#/definitions/ResidencyDocumentTypeRS'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/ResidencyDocumentTypeRS
         description: Timatic document type
       stayType:
         type: string
@@ -2473,10 +2575,12 @@ definitions:
     description: Timatic Residency Document
     properties:
       countryCode:
-        $ref: '#/definitions/UpperCaseAlphaLength2to3'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseAlphaLength2to3
         description: country code in 2 or 3 character
       id:
-        $ref: '#/definitions/UpperCaseStringLength1to35'
+        $ref: >-
+          http://services.sabre.com/cki/common/v2#/definitions/UpperCaseStringLength1to35
         description: Timatic Residency Document Type Id
     additionalProperties: false
   ResidencyDocumentTypeRS:
@@ -2500,9 +2604,9 @@ definitions:
       atbData:
         type: string
       image:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/BinaryData'
+        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/BinaryData'
       boardingPassData:
-        $ref: '#/definitions/BoardingPassData'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BoardingPassData'
       zplBoardingPassData:
         type: string
     additionalProperties: false
@@ -2510,7 +2614,7 @@ definitions:
     type: object
     properties:
       bagTagData:
-        $ref: '#/definitions/BagTagPrintData'
+        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/BagTagPrintData'
       zplBagTagDataList:
         type: array
         items:
