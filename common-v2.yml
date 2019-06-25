@@ -1091,21 +1091,21 @@ definitions:
     description: Passenger's journey detail
     properties:
       airlineCode:
-        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airline'
+        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airline'
         description: IATA Airline designator.
       flightNumber:
-        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
+        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/FlightNumber'
         description: Flight number
       departureAirportCode:
-        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airport'
         description: >-
           Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        type: string
         description: Local departure date of the flight.
       arrivalAirportCode:
-        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
+        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airport'
         description: >-
           Destination airport code of the flight or Airport code where the
           flight is arriving
