@@ -795,6 +795,7 @@ definitions:
     minLength: 3
     maxLength: 3
     pattern: '^([A-Z]{3})$'
+    example: 'AUH'
     description: IATA 3 character airport/city code
   PhoneNumber:
     type: string
@@ -1069,6 +1070,7 @@ definitions:
         description: Marketing airline code
       flightNumber:
         $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/FlightNumber'
+        example: '371'
         description: Flight number provided by the marketing airline
       departureAirport:
         $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/Code_Airport'
