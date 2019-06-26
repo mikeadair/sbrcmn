@@ -884,17 +884,21 @@ definitions:
     properties:
       type:
         type: string
+        example: 'ValidationError'
         description: >-
           Error result type: Either of ValidationError, ApplicationError,
           BusinesslogicError
       code:
         type: string
+        example: '1609_ERR.INVALID_DESTINATION_ADDRESS'
         description: unique identifier for Error
       message:
         type: string
+        example: 'Update Failed'
         description: A short string representation of an error.
       source:
         type: string
+        example: 'CKI'
         description: >-
           a short text represing the System where this error occurred, like CKI,
           HOST, PNR, ANCS etcc
