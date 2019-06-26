@@ -809,6 +809,7 @@ definitions:
         description: Passenger's Middle Name
     additionalProperties: false
   Enum_SSCI_Gender:
+    example: 'MALE'
     enum:
       - MALE
       - FEMALE
