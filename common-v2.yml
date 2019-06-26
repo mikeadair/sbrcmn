@@ -170,6 +170,7 @@ definitions:
   SsciPassengerId:
     type: string
     pattern: '^([a-zA-Z0-9]{12})$'
+    example: '43B326820001'
     description: >-
       String of characters uniquely identifying the passenger on a given flight
       in SSCI.
@@ -777,8 +778,10 @@ definitions:
     properties:
       value:
         $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/RecordLocator'
+        example: 'WQTKPC'
       nameAssociationId:
         $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
+        example: '1'
         description: PNR name association ID
     required:
       - value
@@ -815,6 +818,7 @@ definitions:
     minLength: 1
     maxLength: 20
     pattern: '^([A-Z0-9]{1,20})$'
+    example: 'SAMPLE12'
   UpperCaseAlphaSpaceNumericLength1to30:
     type: string
     minLength: 0
@@ -896,6 +900,7 @@ definitions:
     additionalProperties: false
   Enum_ActionType:
     description: Action Type EDIT or DELETE
+    example: 'EDIT'
     enum:
       - EDIT
       - DELETE
@@ -1096,21 +1101,21 @@ definitions:
         description: IATA Airline designator.
       flightNumber:
         $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/FlightNumber'
-        example: '0307'
+        example: '371'
         description: Flight number
       departureAirportCode:
         $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airport'
-        example: 'AUH'
+        example: 'DFW'
         description: >-
           Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
         type: string
-        example: '2019-07-13'
+        example: '2019-06-26'
         description: Local departure date of the flight.
       arrivalAirportCode:
         $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airport'
-        example: 'KWI'
+        example: 'SCL'
         description: >-
           Destination airport code of the flight or Airport code where the
           flight is arriving
@@ -2226,7 +2231,7 @@ definitions:
         $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
         description: flight departure date
       editCodeList:
-        $ref: 'http://services.sabre.com/cki/common/v2#/definitions/EditCodeList'
+        $ref: '#/definitions/EditCodeList'
         description: passenger's list of edit codes
       travelDocumentList:
         type: array
