@@ -810,6 +810,7 @@ definitions:
     additionalProperties: false
   Enum_SSCI_Gender:
     type: string
+    description: Genger type
     example: 'MALE'
     enum:
       - MALE
