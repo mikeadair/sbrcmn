@@ -904,6 +904,7 @@ definitions:
           HOST, PNR, ANCS etcc
     additionalProperties: false
   Enum_ActionType:
+    type: string
     description: Action Type EDIT or DELETE
     example: 'EDIT'
     enum:
