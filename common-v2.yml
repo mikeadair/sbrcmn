@@ -1107,8 +1107,8 @@ definitions:
     description: Passenger's journey detail
     properties:
       airlineCode:
-        description: IATA Airline designator
-        example: 'K0'
+        description: IATA Airline designator.
+        example: 'K0'        
         allOf:        
           - $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airline'
       flightNumber:
