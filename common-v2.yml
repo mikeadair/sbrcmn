@@ -46,7 +46,7 @@ definitions:
         type: string
         description: id is a unique identifier for this error message
       timeStamp:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: time stamp
       status:
         type: string
@@ -100,7 +100,7 @@ definitions:
         type: string
         description: A short string representation of an error.
       timeStamp:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Date/time when an error was generated.
       message:
         type: string
@@ -134,7 +134,7 @@ definitions:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: Origin of the flight.
       departureDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date.
     required:
       - airline
@@ -156,7 +156,7 @@ definitions:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: Origin of the flight.
       departureDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date.
       destinationAirport:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
@@ -219,7 +219,7 @@ definitions:
         items:
           $ref: '#/definitions/Address'
       birthday:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
       maritalStatus:
         type: string
       gender:
@@ -336,7 +336,7 @@ definitions:
           This element contains unstructured details about person's place of
           birth.
       dateOfBirth:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date of birth if different than in containing structure
       issuingCountry:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
@@ -348,10 +348,10 @@ definitions:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: The place where the document has been issued
       issueDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the document was issued
       expiryDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the document will expire
       gender:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Enum_Gender'
@@ -943,7 +943,7 @@ definitions:
           Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date of the flight.
     required:
       - airlineCode
@@ -969,13 +969,13 @@ definitions:
     description: Airport specific information
     properties:
       scheduledDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Scheduled date of arrival or departure as applicable for airport.
       scheduledTime:
         type: string
         description: Scheduled time of arrival or departure as applicable for airport.
       estimatedDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Estimated date of arrival or departure as applicable for airport.
       estimatedTime:
         type: string
@@ -985,7 +985,7 @@ definitions:
     description: Represents baggage weight and unit
     properties:
       value:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/integer'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
       unit:
         $ref: '#/definitions/WeightUnitCode'
         description: Unit of measure
@@ -1001,7 +1001,7 @@ definitions:
     description: A generic type used to represent length and unit.
     properties:
       value:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/integer'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
       unit:
         $ref: '#/definitions/LengthUnitCode'
         description: bag length unit codes.
@@ -1083,7 +1083,7 @@ definitions:
     type: object
     properties:
       itemId:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/long'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/long'
         description: Specefies the Unique AE identifier
       atpcoGroupCode:
         type: string
@@ -1156,7 +1156,7 @@ definitions:
           Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date of the flight.
       arrivalAirportCode:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
@@ -1511,13 +1511,13 @@ definitions:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: Service number for the flight.
       departureDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Schedule Departure Date.
       departureTime:
         type: string
         description: Schedule Departure Time.
       departureDateEstimated:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Estimated Departure Date.
       departureTimeEstimated:
         type: string
@@ -1537,13 +1537,13 @@ definitions:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: Service number for the flight.
       departureDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Schedule Departure Date.
       departureTime:
         type: string
         description: Schedule Departure Time.
       departureDateEstimated:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Estimated Departure Date.
       departureTimeEstimated:
         type: string
@@ -1629,7 +1629,7 @@ definitions:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: Bag Tag Issuing Airline code
       issueDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date of bag tag issue
       issueTime:
         type: string
@@ -1692,7 +1692,7 @@ definitions:
           #/definitions/BTBagRouteFlightInfo
         description: Bag tag route segment flight information
       checkinSequenceNumber:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/int'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
         description: >-
           passenger check in sequence Number relative to other passengeres
           checked-in on the flight
@@ -2152,10 +2152,10 @@ definitions:
     description: Date range used in requests
     properties:
       from:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Starting date of the range
       to:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: End date of the range
     required:
       - from
@@ -2214,7 +2214,7 @@ definitions:
     type: object
     properties:
       segmentID:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/short'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/short'
         description: Segment no.
       operatingAirlineCode:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
@@ -2243,7 +2243,7 @@ definitions:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: flight arrival city code
       departureDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: flight departure date
       editCodeList:
         $ref: '#/definitions/EditCodeList'
@@ -2472,7 +2472,7 @@ definitions:
           #/definitions/UpperCaseAlphaSpaceNumericLength1to35
         description: City where visa was issued
       dateOfIssue:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Date of visa issuance, Format: YYYY-MM-DD'
       countryCode:
         $ref: >-
@@ -2498,7 +2498,7 @@ definitions:
           #/definitions/UpperCaseAlphaSpaceNumericLength1to20
         description: Document number
       dateOfBirth:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Date of Birth, Format: YYYY-MM-DD'
       personName:
         $ref: '#/definitions/SsciPersonName'
@@ -2519,7 +2519,7 @@ definitions:
           Document Issuing country code, Format : 2 or 3 character IATA country
           code
       dateOfExpiration:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Document expiration date, Format: YYYY-MM-DD'
       swipeIndicator:
         $ref: >-
@@ -2554,7 +2554,7 @@ definitions:
         $ref: '#/definitions/Enum_StayType'
         description: Timatic stay type
       returnDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Timatic return date.2017-08-14
       visa:
         $ref: '#/definitions/Enum_VisaVerified'
@@ -2581,7 +2581,7 @@ definitions:
         type: string
         description: Timatic stay type
       returnDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Timatic return date.2017-08-14
       visa:
         type: string
