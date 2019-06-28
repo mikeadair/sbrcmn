@@ -173,10 +173,10 @@ definitions:
     description: Defined period of undated time
     properties:
       begin:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/time'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/time'
         description: When the range begins
       end:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/time'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/time'
         description: When the range ends
     additionalProperties: false
   Address:
@@ -333,7 +333,7 @@ definitions:
     description: Represents distance
     properties:
       value:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/int'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
       unit:
         $ref: >-
           #/definitions/Enum_MileageUnit
@@ -370,10 +370,10 @@ definitions:
           #/definitions/LoyaltyTierLevel
         description: Passenger's loyalty account tier level.
       membershipStartDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the member joined the loyalty program.
       latestAwardDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Last time when the member was awarded.
     required:
       - memberAirline
@@ -409,7 +409,7 @@ definitions:
           This element contains unstructured details about person's place of
           birth.
       dateOfBirth:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date of birth if different than in containing structure
       issuingCountry:
         $ref: '#/definitions/Code_Country'
@@ -421,10 +421,10 @@ definitions:
         $ref: '#/definitions/ShortString'
         description: The place where the document has been issued
       issueDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the document was issued
       expiryDate:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the document will expire
       gender:
         $ref: '#/definitions/Enum_Gender'
@@ -446,10 +446,10 @@ definitions:
         $ref: '#/definitions/Code_Airport'
         description: Indicates the location where the stop occurs
       arrivalTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Arrival date and time
       departureTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Departure date and time
       duration:
         $ref: >-
@@ -848,7 +848,7 @@ definitions:
         $ref: '#/definitions/ShortString'
         description: Brand name as defined in the MM (Merchandising Manager) system.
       number:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/int'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
         description: Loyalty tier level identifier
       tag:
         $ref: '#/definitions/ShortString'
@@ -946,7 +946,7 @@ definitions:
     description: Represents binary data (e.g.
     properties:
       value:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/binary'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/binary'
       contentType:
         $ref: '#/definitions/ContentType'
         description: >-
@@ -1076,13 +1076,13 @@ definitions:
         $ref: '#/definitions/Code_Airport'
         description: Origin of the flight
       departureTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Departure date and time
       arrivalAirport:
         $ref: '#/definitions/Code_Airport'
         description: Destination of the flight
       arrivalTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Arrival date and time
       operatingAirline:
         $ref: '#/definitions/Code_Airline'
@@ -1131,13 +1131,13 @@ definitions:
         $ref: '#/definitions/Code_Airport'
         description: Origin of the flight
       departureTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Departure date and time
       arrivalAirport:
         $ref: '#/definitions/Code_Airport'
         description: Destination of the flight
       arrivalTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Arrival date and time
       operatingAirline:
         $ref: '#/definitions/Code_Airline'
@@ -1176,12 +1176,12 @@ definitions:
         $ref: '#/definitions/Enum_FlightSpan'
         description: Flight span e.g.
       estimatedDepartureTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: >-
           Estimated departure date and time, which is when the flight moves
           under airport control
       estimatedArrivalTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: >-
           Estimated arrival date and time, which is when the flight moves under
           airport control
@@ -1194,7 +1194,7 @@ definitions:
           #/definitions/Enum_FlightScheduleStatus
         description: Arrival flight status related to schedule.
       boardingTime:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/dateTime'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Time the aircraft is scheduled for boarding
       departureTerminal:
         $ref: '#/definitions/ShortString'
@@ -1407,7 +1407,7 @@ definitions:
           Code identifying specific categories or groups of fares, such as
           normal, special, refundable, non-refundable, exchangeable, etc.
       atpcoTariff:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/short'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/short'
         description: >-
           ATPCO tariff number (geographically based) that indicates the fare
           paid for the travel with the priced service is governed by a specific
@@ -1482,7 +1482,7 @@ definitions:
         $ref: '#/definitions/PersonName'
         description: Passenger name
       dateOfBirth:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/date'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date of birth.
       loyaltyAccount:
         type: array
@@ -1789,7 +1789,7 @@ definitions:
   Size:
     properties:
       value:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/int'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
       unit:
         $ref: '#/definitions/Enum_SizeUnit'
     required:
@@ -1874,10 +1874,10 @@ definitions:
           #/definitions/Enum_PropertyType
         description: Type of a property.
       min:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/integer'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
         description: A minimum value for given property.
       max:
-        $ref: 'http://services.sabre.com/sp/cmm/types/v01_00#/definitions/integer'
+        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
         description: A maximum value of given property.
       unit:
         $ref: '#/definitions/ShortString'
