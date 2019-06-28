@@ -1107,29 +1107,33 @@ definitions:
     description: Passenger's journey detail
     properties:
       airlineCode:
-        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airline'
-        example: 'K0'
         description: IATA Airline designator.
+        example: 'K0'        
+        allOf:        
+          - $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airline'
       flightNumber:
-        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/FlightNumber'
-        example: '371'
         description: Flight number
+        example: '371'
+        allOf:        
+          - $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/FlightNumber'
       departureAirportCode:
-        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airport'
-        example: 'DFW'
         description: >-
           Origin airport code of the flight or Airport code from where the
           flight is departing
+        example: 'DFW'
+        allOf:        
+          - $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airport'
       departureDate:
         type: string
         example: '2019-06-26'
         description: Local departure date of the flight.
       arrivalAirportCode:
-        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airport'
-        example: 'SCL'
         description: >-
           Destination airport code of the flight or Airport code where the
           flight is arriving
+        example: 'SCL'  
+        allOf:        
+          - $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airport'        
     required:
       - airlineCode
       - flightNumber
