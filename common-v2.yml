@@ -777,12 +777,15 @@ definitions:
   PNRLocator:
     properties:
       value:
-        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/RecordLocator'
+        description: PNR Locator.
         example: 'WQTKPC'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/RecordLocator' 
       nameAssociationId:
-        $ref: 'http://services.sabre.com/ssse/common/v15#/definitions/TinyString'
-        example: '1'
         description: PNR name association ID
+        example: '1'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
     required:
       - value
     additionalProperties: false
