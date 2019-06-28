@@ -1107,7 +1107,10 @@ definitions:
     description: Passenger's journey detail
     properties:
       airlineCode:
-        $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airline'
+        description: IATA Airline designatorr.
+        example: 'K0'
+        allOf: 
+          - $ref: 'https://github.com/mikeadair/sbrcmn/blob/master/common-v15.yml#/definitions/Code_Airline'
       flightNumber:
         description: Flight number
         example: '371'
