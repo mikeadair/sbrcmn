@@ -1,0 +1,115 @@
+swagger: '2.0'
+info:
+  title: types
+  version: "v01_00"
+  description: types
+  contact:
+    name: Contact Us
+    url: 'https://beta.developer.sabre.com/contact'
+x-project-id: types
+host: api-crt.cert.havail.sabre.com
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v01_00/cki/types:
+    post:
+      operationId: types
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: |
+            Bad Request
+securityDefinitions:
+  oauth2_authentication:
+    type: oauth2
+    tokenUrl: 'https://api-crt.cert.havail.sabre.com/v2/auth/token'
+    flow: application
+    x-base64-encode-client-credentials: true
+security:
+  - oauth2_authentication: []
+definitions:
+  string:
+    type: string
+  boolean:
+    type: boolean
+  int:
+    type: integer
+    minimum: -2147483648
+    maximum: 2147483647
+  unsignedInt:
+    type: integer
+    minimum: 0
+    maximum: 4294967295
+  byte:
+    type: integer
+    minimum: -128
+    maximum: 127
+  unsignedByte:
+    type: integer
+    minimum: 0
+    maximum: 255
+  short:
+    type: integer
+    minimum: -32768
+    maximum: 32767
+  unsignedShort:
+    type: integer
+    minimum: 0
+    maximum: 65535
+  long:
+    type: integer
+    minimum: -9223372036854776000
+    maximum: 9223372036854776000
+  unsignedLong:
+    type: integer
+    minimum: 0
+    maximum: 18446744073709552000
+  integer:
+    type: integer
+  float:
+    type: number
+  double:
+    type: number
+  decimal:
+    type: number
+  duration:
+    type: string
+  dateTime:
+    type: string
+    format: date-time
+  time:
+    type: string
+  date:
+    type: string
+  yearMonth:
+    type: string
+  year:
+    type: string
+  monthDay:
+    type: string
+  day:
+    type: string
+  month:
+    type: string
+  language:
+    type: string
+    pattern: '^[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*$'
+  uri:
+    type: string
+    format: uri
+  binary:
+    type: string
+    pattern: '^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+  any: {}
+  anyScalar:
+    anyOf:
+      - type: string
+      - type: number
+      - type: boolean
+      - type: 'null'
