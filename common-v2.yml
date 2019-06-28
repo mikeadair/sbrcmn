@@ -1110,19 +1110,19 @@ definitions:
         description: IATA Airline designator.
         example: 'K0'        
         allOf:        
-          - $ref: 'https://github.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
       flightNumber:
         description: Flight number
         example: '371'
         allOf:        
-          - $ref: 'https://github.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
       departureAirportCode:
         description: >-
           Origin airport code of the flight or Airport code from where the
           flight is departing
         example: 'DFW'
         allOf:        
-          - $ref: 'https://github.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
       departureDate:
         type: string
         example: '2019-06-26'
@@ -1133,7 +1133,7 @@ definitions:
           flight is arriving
         example: 'SCL'  
         allOf:        
-          - $ref: 'https://github.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'        
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'        
     required:
       - airlineCode
       - flightNumber
