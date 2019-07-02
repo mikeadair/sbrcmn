@@ -121,7 +121,8 @@ definitions:
       value:
         $ref: '#/definitions/Email'
       type:
-        $ref: '#/definitions/Enum_EmailType'
+        allOf: 
+          - $ref: '#/definitions/Enum_EmailType'
         description: Indicates the type of the email.
     required:
       - value
@@ -158,7 +159,8 @@ definitions:
       value:
         $ref: '#/definitions/Name_Market'
       code:
-        $ref: '#/definitions/Code_Market'
+        allOf: 
+          - $ref: '#/definitions/Code_Market'
         description: Code of the market e.g.
     required:
       - value
@@ -173,10 +175,12 @@ definitions:
     description: Defined period of undated time
     properties:
       begin:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/time'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/time'
         description: When the range begins
       end:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/time'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/time'
         description: When the range ends
     additionalProperties: false
   Address:
@@ -186,32 +190,40 @@ definitions:
       id:
         type: string
       type:
-        $ref: >-
-          #/definitions/Enum_AddressType
+        allOf: 
+          - $ref: '#/definitions/Enum_AddressType'
         description: The type of a address.
       companyName:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Name of the company.
       personName:
-        $ref: '#/definitions/PersonName'
+        allOf: 
+          - $ref: '#/definitions/PersonName'
         description: Passenger name
       street1:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Street part of an address.
       street2:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Additional street part which might be required in some cases
       postalCode:
-        $ref: '#/definitions/Code_Postal'
+        allOf: 
+          - $ref: '#/definitions/Code_Postal'
         description: Postal code.
       country:
-        $ref: '#/definitions/Code_Country'
+        allOf: 
+          - $ref: '#/definitions/Code_Country'
         description: 'PseudoCity code and default currency, if specified.'
       city:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: City name
       stateProvince:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: State or province.
     additionalProperties: false
   PaymentCard:
@@ -221,22 +233,27 @@ definitions:
       id:
         type: string
       typeCode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/PaymentCard_TypeCode
         description: The code of the card e.g.
       cardType:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_PaymentCardType
         description: Type of Payment Card whether CreditCard or DebitCard
       number:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/PaymentCard_Number
         description: The actual payment card number
       nameOnCard:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Owner name on the card
       expirationDetails:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/PaymentCard_ExpirationDetails
         description: Month and year until the card is valid
     required:
@@ -248,20 +265,25 @@ definitions:
     description: A genetic type used to represent phone number
     properties:
       type:
-        $ref: '#/definitions/Enum_PhoneType'
+        allOf: 
+          - $ref: '#/definitions/Enum_PhoneType'
         description: Type of the phone number e.g.
       countryCode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Code_Phone_Country
         description: Country code portion of the number.
       areaCode:
-        $ref: '#/definitions/Code_Phone_Area'
+        allOf: 
+          - $ref: '#/definitions/Code_Phone_Area'
         description: Area code portion of the number
       number:
-        $ref: '#/definitions/PhoneNumber'
+        allOf: 
+          - $ref: '#/definitions/PhoneNumber'
         description: The actual number
       extension:
-        $ref: '#/definitions/PhoneNumber'
+        allOf: 
+          - $ref: '#/definitions/PhoneNumber'
         description: Optional extension suffix
     required:
       - number
@@ -271,22 +293,28 @@ definitions:
     description: A generic type used to represent traveler name
     properties:
       prefix:
-        $ref: '#/definitions/TinyString'
+        allOf: 
+          - $ref: '#/definitions/TinyString'
         description: 'Prefix placed before the passenger name, such as Mr., Dr., Ms, etc.'
       first:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: First name
       middle:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Optional middle name
       last:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Last name
       suffix:
-        $ref: '#/definitions/TinyString'
+        allOf: 
+          - $ref: '#/definitions/TinyString'
         description: Optional suffix
       raw:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Passenger surname as stored in the system.
     required:
       - first
@@ -318,7 +346,8 @@ definitions:
       value:
         $ref: '#/definitions/Amount'
       currency:
-        $ref: '#/definitions/Code_Currency'
+        allOf: 
+          - $ref: '#/definitions/Code_Currency'
         description: Code of the currency
     required:
       - value
@@ -335,7 +364,8 @@ definitions:
       value:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
       unit:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_MileageUnit
         description: Unit of the stored mileage e.g.
     required:
@@ -354,26 +384,33 @@ definitions:
       id:
         type: string
       memberAirline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: Member airline code.
       memberId:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Member identifier - the format depends on the airline
       mileage:
-        $ref: '#/definitions/Mileage'
+        allOf: 
+          - $ref: '#/definitions/Mileage'
         description: Current mileage value associated with the loyalty account
       points:
-        $ref: '#/definitions/LoyaltyPoints'
+        allOf: 
+          - $ref: '#/definitions/LoyaltyPoints'
         description: Price expressed in frequent flyer points/miles
       loyaltyTierLevel:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/LoyaltyTierLevel
         description: Passenger's loyalty account tier level.
       membershipStartDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the member joined the loyalty program.
       latestAwardDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Last time when the member was awarded.
     required:
       - memberAirline
@@ -386,48 +423,61 @@ definitions:
       id:
         type: string
       type:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_DocumentType
         description: Type of the document
       number:
-        $ref: '#/definitions/TinyString'
+        allOf: 
+          - $ref: '#/definitions/TinyString'
         description: Document number
       personName:
-        $ref: '#/definitions/PersonName'
+        allOf: 
+          - $ref: '#/definitions/PersonName'
         description: Passenger name
       nationality:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Code_Country_Extended
         description: Nationality country code
       countryOfBirth:
-        $ref: '#/definitions/Code_Country'
+        allOf: 
+          - $ref: '#/definitions/Code_Country'
         description: The code of country where the person was born.
       placeOfBirth:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/String_From1to35
         description: >-
           This element contains unstructured details about person's place of
           birth.
       dateOfBirth:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date of birth if different than in containing structure
       issuingCountry:
-        $ref: '#/definitions/Code_Country'
+        allOf: 
+          - $ref: '#/definitions/Code_Country'
         description: The code of country which issued the document
       applicableCountry:
-        $ref: '#/definitions/Code_Country'
+        allOf: 
+          - $ref: '#/definitions/Code_Country'
         description: The code of country which the document is applicable for e.g.
       issuingPlace:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: The place where the document has been issued
       issueDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the document was issued
       expiryDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the document will expire
       gender:
-        $ref: '#/definitions/Enum_Gender'
+        allOf: 
+          - $ref: '#/definitions/Enum_Gender'
         description: Gender as provided in the document
     required:
       - type
@@ -443,20 +493,25 @@ definitions:
     description: Represents break during a single segment e.g.
     properties:
       airport:
-        $ref: '#/definitions/Code_Airport'
+        allOf: 
+          - $ref: '#/definitions/Code_Airport'
         description: Indicates the location where the stop occurs
       arrivalTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Arrival date and time
       departureTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Departure date and time
       duration:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/DurationInMinutes
         description: Time at the stop airport expressed in minutes.
       elapsedTime:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/DurationInMinutes
         description: >-
           Flight time from departure airport to layover airport expressed in
@@ -484,16 +539,20 @@ definitions:
       id:
         type: string
       name:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: May be a person name or business name.
       countryCode:
-        $ref: '#/definitions/Code_Country'
+        allOf: 
+          - $ref: '#/definitions/Code_Country'
         description: Country associated with the emergency contact details
       contactDetails:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: May be anything but usually it is a phone number
       relationship:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Relationship between emergency contact and passenger(s)
     additionalProperties: false
   Enum_WeightUnit:
@@ -505,9 +564,11 @@ definitions:
     description: Represents weight of an object e.g.
     properties:
       value:
-        $ref: '#/definitions/WeightValue'
+        allOf: 
+          - $ref: '#/definitions/WeightValue'
       unit:
-        $ref: '#/definitions/Enum_WeightUnit'
+        allOf: 
+          - $ref: '#/definitions/Enum_WeightUnit'
         description: Weight unit e.g.
     required:
       - value
@@ -565,19 +626,22 @@ definitions:
       email:
         type: array
         items:
-          $ref: '#/definitions/EmailAddress'
+          allOf: 
+          - $ref: '#/definitions/EmailAddress'
           description: Email addresses associated with the profile
         maxItems: 10
       phone:
         type: array
         items:
-          $ref: '#/definitions/Phone'
+          allOf: 
+            - $ref: '#/definitions/Phone'
           description: Phone numbers associated with the profile
         maxItems: 10
       address:
         type: array
         items:
-          $ref: '#/definitions/Address'
+          allOf: 
+            - $ref: '#/definitions/Address'
           description: Addresses associated with the profile
         maxItems: 10
     additionalProperties: false
@@ -645,32 +709,39 @@ definitions:
     description: A generic type used to represent a price or a price component.
     properties:
       code:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: An optional code used to specify a subtype of a price e.g.
       override:
         type: boolean
         description: Attribute relevant only for tax price element in Reprice operation.
       referenceAmount:
-        $ref: '#/definitions/Money'
+        allOf: 
+          - $ref: '#/definitions/Money'
         description: >-
           Value that is not used as the amount a passenger should pay for the
           fare.
       amount:
-        $ref: '#/definitions/Money'
+        allOf: 
+          - $ref: '#/definitions/Money'
         description: >-
           Regulatory price amount in the original currency in which the fare was
           defined.
       equivAmount:
-        $ref: '#/definitions/Money'
+        allOf: 
+          - $ref: '#/definitions/Money'
         description: Regulatory price amount converted to the requested currency
       points:
-        $ref: '#/definitions/LoyaltyPoints'
+        allOf: 
+          - $ref: '#/definitions/LoyaltyPoints'
         description: Price expressed in frequent flyer points/miles
       conversionRatio:
-        $ref: '#/definitions/ConversionRatio'
+        allOf: 
+          - $ref: '#/definitions/ConversionRatio'
         description: Details required to convert loyalty points/miles to a monetary amount.
       taxType:
-        $ref: '#/definitions/Enum_TaxType'
+        allOf: 
+          - $ref: '#/definitions/Enum_TaxType'
         description: An optional type used to specify a tax application type
     additionalProperties: false
   PriceBreakdown:
@@ -678,17 +749,20 @@ definitions:
     description: This structure is used to represent total fare.
     properties:
       total:
-        $ref: '#/definitions/PriceElement'
+        allOf: 
+          - $ref: '#/definitions/PriceElement'
         description: Grand total price for the fare.
       base:
-        $ref: '#/definitions/PriceElement'
+        allOf: 
+          - $ref: '#/definitions/PriceElement'
         description: >-
           Base amount of the ancillary fee that can also include taxes if
           TaxesIncludedInBase is set to 'true'
       tax:
         type: array
         items:
-          $ref: '#/definitions/PriceElement'
+          allOf: 
+            - $ref: '#/definitions/PriceElement'
           description: >-
             Generic type code used to represent a price or a price component
             that supports both monetary and/or frequent flyer type of amounts.
@@ -696,25 +770,29 @@ definitions:
       fee:
         type: array
         items:
-          $ref: '#/definitions/PriceElement'
+          allOf: 
+          - $ref: '#/definitions/PriceElement'
           description: Summarized fee prices
         maxItems: 20
       surcharge:
         type: array
         items:
-          $ref: '#/definitions/PriceElement'
+          allOf: 
+            - $ref: '#/definitions/PriceElement'
           description: Summarized surcharge prices
         maxItems: 20
       commission:
         type: array
         items:
-          $ref: '#/definitions/PriceElement'
+          allOf: 
+            - $ref: '#/definitions/PriceElement'
           description: Commission amount charged as part of this price.
         maxItems: 20
       discount:
         type: array
         items:
-          $ref: '#/definitions/PriceElement'
+          allOf: 
+            - $ref: '#/definitions/PriceElement'
           description: Applicable discounts.
         maxItems: 20
     additionalProperties: false
@@ -845,13 +923,16 @@ definitions:
     description: Loyalty account tier level definition.
     properties:
       name:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Brand name as defined in the MM (Merchandising Manager) system.
       number:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
         description: Loyalty tier level identifier
       tag:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Code that identifies a loyalty account tier level
     additionalProperties: false
   Code_PassengerType:
@@ -905,10 +986,12 @@ definitions:
     description: Username/password form of authentication.
     properties:
       username:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Username recognized by the system this credentials are used for.
       password:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Password which matches the Username.
     required:
       - username
@@ -930,10 +1013,12 @@ definitions:
     description: Ratio used to calculate monetary equivalent of the points/miles.
     properties:
       value:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/PointsConversionRatio
       minimumPoints:
-        $ref: '#/definitions/LoyaltyPoints'
+        allOf: 
+          - $ref: '#/definitions/LoyaltyPoints'
         description: Minimal number of points which must remain unconverted.
     required:
       - value
@@ -948,12 +1033,14 @@ definitions:
       value:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/binary'
       contentType:
-        $ref: '#/definitions/ContentType'
+        allOf: 
+          - $ref: '#/definitions/ContentType'
         description: >-
           Content type (also known as mime or media type) that specifies the
           type of binary content.
       name:
-        $ref: '#/definitions/LongString'
+        allOf: 
+          - $ref: '#/definitions/LongString'
         description: Optional name associated with binary data (e.g.
     required:
       - value
@@ -975,10 +1062,12 @@ definitions:
     description: Provides details about aircraft lease.
     properties:
       lessorAirline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: An airline which provides aircraft to another airline.
       marketingText:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: >-
           Free text description which describes the relation between lessor and
           lessee airlines e.g.
@@ -1001,7 +1090,8 @@ definitions:
       value:
         $ref: '#/definitions/ShortString'
       context:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: This attribute describes the domain the code comes from.
     required:
       - value
@@ -1011,7 +1101,8 @@ definitions:
     description: Client identification data (e.g.
     properties:
       ipAddress:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: IP address
     additionalProperties: false
   Deal:
@@ -1021,31 +1112,38 @@ definitions:
       id:
         type: string
       type:
-        $ref: '#/definitions/Enum_DealType'
+        allOf: 
+          - $ref: '#/definitions/Enum_DealType'
         description: Type of the deal thi structure represents.
       offerName:
-        $ref: '#/definitions/Deal_OfferName'
+        allOf: 
+          - $ref: '#/definitions/Deal_OfferName'
         description: Name of the offer that identifies the discount
       promotionCode:
         type: array
         items:
-          $ref: >-
-            #/definitions/Deal_PromotionCode
+          allOf: 
+            - $ref: >-
+                #/definitions/Deal_PromotionCode
           description: Promotion code used when a request is processed.
         maxItems: 99
       amount:
-        $ref: '#/definitions/Money'
+        allOf: 
+          - $ref: '#/definitions/Money'
         description: >-
           Regulatory price amount in the original currency in which the fare was
           defined.
       points:
-        $ref: '#/definitions/Amount'
+        allOf: 
+          - $ref: '#/definitions/Amount'
         description: Discount represented in number of loyalty points
       percentage:
-        $ref: '#/definitions/Amount'
+        allOf: 
+          - $ref: '#/definitions/Amount'
         description: Price discount represented as a percent
       conversionRatio:
-        $ref: '#/definitions/ConversionRatio'
+        allOf: 
+          - $ref: '#/definitions/ConversionRatio'
         description: Details required to convert loyalty points/miles to a monetary amount.
     required:
       - type
@@ -1066,46 +1164,57 @@ definitions:
       id:
         type: string
       airline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: Marketing airline code
       flightNumber:
-        $ref: '#/definitions/FlightNumber'
+        allOf: 
+          - $ref: '#/definitions/FlightNumber'
         example: '371'
         description: Flight number provided by the marketing airline
       departureAirport:
-        $ref: '#/definitions/Code_Airport'
+        allOf: 
+          - $ref: '#/definitions/Code_Airport'
         description: Origin of the flight
       departureTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Departure date and time
       arrivalAirport:
-        $ref: '#/definitions/Code_Airport'
+        allOf: 
+          - $ref: '#/definitions/Code_Airport'
         description: Destination of the flight
       arrivalTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Arrival date and time
       operatingAirline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: >-
           Operating airline code, which could be different from the marketing
           airline code
       operatingAirlineName:
-        $ref: '#/definitions/MediumString'
+        allOf: 
+          - $ref: '#/definitions/MediumString'
         description: >-
           Operating airline name, which could differ from the marketing airline
           name
       operatingFlightNumber:
-        $ref: '#/definitions/FlightNumber'
+        allOf: 
+          - $ref: '#/definitions/FlightNumber'
         description: >-
           Flight number of the operating airline, which could be different from
           the marketing airline
       disclosureAirline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: >-
           Code that identifies (discloses) the codeshare airline that operates
           the flight.
       equipment:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Code_AircraftType
         description: Code identifying the type of equipment used for the flight
     required:
@@ -1122,103 +1231,128 @@ definitions:
       id:
         type: string
       airline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: Marketing airline code
       flightNumber:
-        $ref: '#/definitions/FlightNumber'
+        allOf: 
+          - $ref: '#/definitions/FlightNumber'
         description: Flight number provided by the marketing airline
       departureAirport:
-        $ref: '#/definitions/Code_Airport'
+        allOf: 
+          - $ref: '#/definitions/Code_Airport'
         description: Origin of the flight
       departureTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Departure date and time
       arrivalAirport:
-        $ref: '#/definitions/Code_Airport'
+        allOf: 
+          - $ref: '#/definitions/Code_Airport'
         description: Destination of the flight
       arrivalTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Arrival date and time
       operatingAirline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: >-
           Operating airline code, which could be different from the marketing
           airline code
       operatingAirlineName:
-        $ref: '#/definitions/MediumString'
+        allOf: 
+          - $ref: '#/definitions/MediumString'
         description: >-
           Operating airline name, which could differ from the marketing airline
           name
       operatingFlightNumber:
-        $ref: '#/definitions/FlightNumber'
+        allOf: 
+          - $ref: '#/definitions/FlightNumber'
         description: >-
           Flight number of the operating airline, which could be different from
           the marketing airline
       disclosureAirline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: >-
           Code that identifies (discloses) the codeshare airline that operates
           the flight.
       equipment:
-        $ref: >-
-          #/definitions/Code_AircraftType
+        allOf: 
+          - $ref: >-
+              #/definitions/Code_AircraftType
         description: Code identifying the type of equipment used for the flight
       flightStop:
         type: array
         items:
-          $ref: '#/definitions/FlightStop'
+          allOf: 
+          - $ref: '#/definitions/FlightStop'
           description: Represents break during multi leg flight e.g.
         maxItems: 10
       distance:
-        $ref: '#/definitions/Mileage'
+        allOf: 
+          - $ref: '#/definitions/Mileage'
         description: Distance of the flight in the selected unit of measure
       span:
-        $ref: '#/definitions/Enum_FlightSpan'
+        allOf: 
+          - $ref: '#/definitions/Enum_FlightSpan'
         description: Flight span e.g.
       estimatedDepartureTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: >-
           Estimated departure date and time, which is when the flight moves
           under airport control
       estimatedArrivalTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: >-
           Estimated arrival date and time, which is when the flight moves under
           airport control
       departureFlightScheduleStatus:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_FlightScheduleStatus
         description: Departure flight status as it relates to the schedule
       arrivalFlightScheduleStatus:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_FlightScheduleStatus
         description: Arrival flight status related to schedule.
       boardingTime:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Time the aircraft is scheduled for boarding
       departureTerminal:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Terminal designated for boarding.
       departureGate:
-        $ref: '#/definitions/TinyString'
+        allOf: 
+          - $ref: '#/definitions/TinyString'
         description: Gate designated for boarding
       departureCountry:
-        $ref: '#/definitions/Code_Country'
+        allOf: 
+          - $ref: '#/definitions/Code_Country'
         description: Code identifying the departure country
       arrivalCountry:
-        $ref: '#/definitions/Code_Country'
+        allOf: 
+          - $ref: '#/definitions/Code_Country'
         description: Code identifying the arrival country
       commuter:
         type: boolean
         description: Flag indicating whether this is a commuter flight.
       aircraftLease:
-        $ref: '#/definitions/AircraftLease'
+        allOf: 
+          - $ref: '#/definitions/AircraftLease'
         description: Details regarding the aircraft lease used to operate the flight.
       changeOfGauge:
         type: boolean
         description: Change of equipment on multi-leg flights.
       arrivalTerminal:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: Arrival terminal.
       subjectToGovernmentApproval:
         type: boolean
@@ -1254,15 +1388,18 @@ definitions:
     description: Details required to convert loyalty points/miles to monetary amount.
     properties:
       scalingMode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_ScalingMode
         description: Scale indicating the calculated converted value
       roundingMode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_RoundingMode
         description: Rounding mode used when the converted value is calculated
       minimumPoints:
-        $ref: '#/definitions/LoyaltyPoints'
+        allOf: 
+          - $ref: '#/definitions/LoyaltyPoints'
         description: Minimum points required for dynamic conversion
     additionalProperties: false
   Percent:
@@ -1277,9 +1414,11 @@ definitions:
     description: Aircraft deck code.
     properties:
       value:
-        $ref: '#/definitions/Enum_Deck'
+        allOf: 
+          - $ref: '#/definitions/Enum_Deck'
       code:
-        $ref: '#/definitions/Code_Deck'
+        allOf: 
+          - $ref: '#/definitions/Code_Deck'
         description: Custom deck code.
     required:
       - value
@@ -1297,7 +1436,8 @@ definitions:
       id:
         type: string
       syntheticIdentifier:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/SyntheticIdentifier
         description: >-
           Artificially generated identifier required in rare cases to identify
@@ -1305,13 +1445,15 @@ definitions:
       flightDetail:
         type: array
         items:
-          $ref: '#/definitions/FlightDetail'
+          allOf: 
+            - $ref: '#/definitions/FlightDetail'
           description: Flight details.
         maxItems: 10
       fareInfo:
         type: array
         items:
-          $ref: '#/definitions/FareInfo'
+          allOf: 
+            - $ref: '#/definitions/FareInfo'
           description: 'Fare information, which is usually a single element.'
         maxItems: 10
     required:
@@ -1325,7 +1467,8 @@ definitions:
       segment:
         type: array
         items:
-          $ref: '#/definitions/Segment'
+          allOf: 
+            - $ref: '#/definitions/Segment'
           description: List of segments
         maxItems: 1000
     required:
@@ -1340,16 +1483,19 @@ definitions:
       id:
         type: string
       type:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_ItineraryPartType
         description: Type of the itinerary part.
       brand:
-        $ref: '#/definitions/Code_FareBrand'
+        allOf: 
+          - $ref: '#/definitions/Code_FareBrand'
         description: Fare brand code
       segment:
         type: array
         items:
-          $ref: '#/definitions/Segment'
+          allOf: 
+            - $ref: '#/definitions/Segment'
           description: List of segments
         maxItems: 10
     required:
@@ -1362,7 +1508,8 @@ definitions:
       itineraryPart:
         type: array
         items:
-          $ref: '#/definitions/ItineraryPart'
+          allOf: 
+            - $ref: '#/definitions/ItineraryPart'
           description: >-
             Portion of the itinerary to be searched for which a baggage price is
             requested, or to identify any corresponding ancillaries.
@@ -1377,48 +1524,58 @@ definitions:
       id:
         type: string
       bookingClass:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Code_BookingClass
         description: >-
           Cabin booking class code, also known as RBD (Reservations/Booking
           Designator), that contains one uppercase alpha character.
       cabinClass:
-        $ref: '#/definitions/Enum_CabinClass'
+        allOf: 
+          - $ref: '#/definitions/Enum_CabinClass'
         description: 'Cabin class, such as ECONOMY.'
       fareBasisCode:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: >-
           Alpha or alphanumeric code that describes the fare type and its
           applicable fare rules
       brand:
-        $ref: '#/definitions/Code_FareBrand'
+        allOf: 
+          - $ref: '#/definitions/Code_FareBrand'
         description: Fare brand code
       governingAirline:
-        $ref: '#/definitions/Code_Airline'
+        allOf: 
+          - $ref: '#/definitions/Code_Airline'
         description: Governing carrier whose fares are used on a designated Fare Component.
       amount:
-        $ref: '#/definitions/Amount'
+        allOf: 
+          - $ref: '#/definitions/Amount'
         description: >-
           Regulatory price amount in the original currency in which the fare was
           defined.
       type:
-        $ref: '#/definitions/Code_FareType'
+        allOf: 
+          - $ref: '#/definitions/Code_FareType'
         description: >-
           Code identifying specific categories or groups of fares, such as
           normal, special, refundable, non-refundable, exchangeable, etc.
       atpcoTariff:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/short'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/short'
         description: >-
           ATPCO tariff number (geographically based) that indicates the fare
           paid for the travel with the priced service is governed by a specific
           rule.
       atpcoRule:
-        $ref: '#/definitions/TinyString'
+        allOf: 
+          - $ref: '#/definitions/TinyString'
         description: >-
           Rule indicating that the fare paid for the travel (with the priced
           service) is governed by a specific rule.
       vendor:
-        $ref: '#/definitions/FareVendor'
+        allOf: 
+          - $ref: '#/definitions/FareVendor'
         description: Entity by which given fare was filed e.g.
       privateTariff:
         type: boolean
@@ -1426,7 +1583,8 @@ definitions:
           Flag indicating whether the fare paid for the travel with the priced
           service is governed by a private or public ATP tariff.
       discountCategory:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/DiscountCategories
         description: >-
           Numeric value specifying that the fare paid for the travel with the
@@ -1471,23 +1629,28 @@ definitions:
       id:
         type: string
       type:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_PassengerType
         description: Type of the passenger.
       passengerIdentifier:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/PassengerIdentifier
         description: Code that uniquely identifies the passenger
       personName:
-        $ref: '#/definitions/PersonName'
+        allOf: 
+          - $ref: '#/definitions/PersonName'
         description: Passenger name
       dateOfBirth:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date of birth.
       loyaltyAccount:
         type: array
         items:
-          $ref: >-
+          allOf: 
+            - $ref: >-
             #/definitions/LoyaltyAccount
           description: Loyalty account details of the user who performs the Service request
         maxItems: 5
@@ -1499,7 +1662,8 @@ definitions:
       passenger:
         type: array
         items:
-          $ref: '#/definitions/Passenger'
+          allOf: 
+            - $ref: '#/definitions/Passenger'
           description: Passenger details
         maxItems: 1000
     required:
@@ -1520,7 +1684,8 @@ definitions:
     description: Portion of the travel.
     properties:
       type:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_TravelPortionType
         description: Type of the travel portion.
       itineraryPartRefs:
@@ -1548,28 +1713,35 @@ definitions:
       the distribution channel and technology used.
     properties:
       businessTransactionType:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_BusinessTransactionType
         description: Type of the business transactions executed on the POS.
       distributionChannel:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/DistributionChannel
         description: Channel of product distribution.
       identifier:
-        $ref: '#/definitions/MediumString'
+        allOf: 
+          - $ref: '#/definitions/MediumString'
         description: POS identifier used for some distribution channels e.g.
       country:
-        $ref: '#/definitions/Code_Country'
+        allOf: 
+          - $ref: '#/definitions/Code_Country'
         description: 'PseudoCity code and default currency, if specified.'
       agentIdentification:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/AgentIdentification
         description: Identifies the travel agent who sends the request.
       serverInfo:
-        $ref: '#/definitions/ServerInfo'
+        allOf: 
+          - $ref: '#/definitions/ServerInfo'
         description: Used in web distribution channel.
       browserInfo:
-        $ref: '#/definitions/BrowserInfo'
+        allOf: 
+          - $ref: '#/definitions/BrowserInfo'
         description: Information regarding the web browser used to execute the Service
     additionalProperties: false
   ServerInfo:
@@ -1592,7 +1764,8 @@ definitions:
       hostName:
         type: string
       ipAddress:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: IP address
       httpHeader:
         type: array
@@ -1614,31 +1787,38 @@ definitions:
     description: Identifies the travel agent who sends the request.
     properties:
       pseudoCityCode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Agent_PseudoCityCode
         description: >-
           Identification code assigned to an office or agency by a reservation
           system
       personalCityCode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Agent_PersonalCityCode
         description: City code identifier included in the Office Accounting Code
       accountingCode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Agent_AccountingCode
         description: Accounting Code identifier included in the Office Accounting Code.
       officeCode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Agent_OfficeCode
         description: Office Code part of Office Accounting Code.
       sine:
-        $ref: '#/definitions/TinyString'
+        allOf: 
+          - $ref: '#/definitions/TinyString'
         description: Identifies the agent or party within the requesting entity.
       dutyCode:
-        $ref: '#/definitions/Agent_DutyCode'
+        allOf: 
+          - $ref: '#/definitions/Agent_DutyCode'
         description: An authority code assigned to a requestor.
       lniata:
-        $ref: '#/definitions/Agent_Lniata'
+        allOf: 
+          - $ref: '#/definitions/Agent_Lniata'
         description: LNIATA of the Console the agent signed into.
     additionalProperties: false
   Enum_DistributionChannel:
@@ -1754,19 +1934,23 @@ definitions:
     description: Airline ticket number.
     properties:
       number:
-        $ref: '#/definitions/TinyString'
+        allOf: 
+          - $ref: '#/definitions/TinyString'
         description: >-
           Represents full ticket number including all its components: airline
           accounting code, stock number and check digit.
       airlineAccountingCode:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Code_AirlineAccounting
         description: IATA assigned 3 digit number.
       serialNumber:
-        $ref: '#/definitions/TinyString'
+        allOf: 
+          - $ref: '#/definitions/TinyString'
         description: Serial number.
       checkDigit:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Code_TicketCheckDigit
         description: Ticket number check digit.
     required:
@@ -1867,20 +2051,25 @@ definitions:
     description: Definition of dynamic property.
     properties:
       name:
-        $ref: '#/definitions/MediumString'
+        allOf: 
+          - $ref: '#/definitions/MediumString'
         description: A name of a property.
       type:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/Enum_PropertyType
         description: Type of a property.
       min:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
         description: A minimum value for given property.
       max:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
         description: A maximum value of given property.
       unit:
-        $ref: '#/definitions/ShortString'
+        allOf: 
+          - $ref: '#/definitions/ShortString'
         description: A unit of given value.
       optional:
         type: boolean
@@ -1905,7 +2094,8 @@ definitions:
     description: Offer of Dynamic Currency Conversion payment.
     properties:
       amount:
-        $ref: '#/definitions/Money'
+        allOf: 
+          - $ref: '#/definitions/Money'
         description: >-
           Regulatory price amount in the original currency in which the fare was
           defined.
@@ -1913,11 +2103,13 @@ definitions:
         $ref: '#/definitions/Money'
         description: Original amount in terminal (POS) currency.
       exchangeRateInfo:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/ExchangeRateInfo
         description: Exchange rate details used for amount calculation.
       supplierIdentifier:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/DynamicCurrencyConversionSupplierIdentification
         description: Identification of the supplier of the DCC solution.
     required:
@@ -1940,15 +2132,18 @@ definitions:
     type: object
     properties:
       rate:
-        $ref: '#/definitions/Rate'
+        allOf: 
+          - $ref: '#/definitions/Rate'
         description: >-
           Exchange rate used to calculate amount in payment card native currency
           from the original POS currency.
       margin:
-        $ref: '#/definitions/Rate'
+        allOf: 
+          - $ref: '#/definitions/Rate'
         description: Applicable merchant margin rate.
       basedOn:
-        $ref: >-
+        allOf: 
+          - $ref: >-
           #/definitions/ExchangeRateBasedOnName
         description: >-
           Name of the provider of the exchange rate used as a base for the final
@@ -1986,13 +2181,16 @@ definitions:
     description: Price modifier containing applicable discount or markup.
     properties:
       markup:
-        $ref: '#/definitions/PriceElement'
+        allOf: 
+          - $ref: '#/definitions/PriceElement'
         description: Applicable markup.
       discount:
-        $ref: '#/definitions/PriceElement'
+        allOf: 
+          - $ref: '#/definitions/PriceElement'
         description: Applicable discounts
       originalBase:
-        $ref: '#/definitions/PriceElement'
+        allOf: 
+          - $ref: '#/definitions/PriceElement'
         description: >-
           Generic type used to represent a price or a price component without
           markup/discount.
