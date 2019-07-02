@@ -35,8 +35,8 @@ security:
   - oauth2_authentication: []
 definitions:
   WebServiceRQ:
-    type: object
     description: base request
+    type: object
     additionalProperties: false
   WebServiceRS:
     type: object
@@ -46,28 +46,31 @@ definitions:
         type: string
         description: id is a unique identifier for this error message
       timeStamp:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: time stamp
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
       status:
         type: string
         description: The completion status of a given transaction.
       errors:
         type: array
         items:
-          $ref: '#/definitions/ErrorType'
           description: Error Result
+          allOf: 
+          - $ref: '#/definitions/ErrorType'
     additionalProperties: false
   SSRCount:
     type: object
     description: Special Service counts
     properties:
       ssr:
-        $ref: '#/definitions/Enum_SSRCodes'
         description: SSR code / Edit Code
+        allOf: 
+          - $ref: '#/definitions/Enum_SSRCodes'
+        
       count:
         $ref: >-
           https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/NonNegativeInteger
-        description: Count of passengers having the SSR assigned
     required:
       - ssr
       - count
@@ -100,8 +103,9 @@ definitions:
         type: string
         description: A short string representation of an error.
       timeStamp:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
         description: Date/time when an error was generated.
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/dateTime'
       message:
         type: string
         description: >-
@@ -125,16 +129,21 @@ definitions:
     description: Representation of a Flight.
     properties:
       airline:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: Operating airline code
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: Flight number.
       departureAirport:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: Origin of the flight.
       departureDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date.
     required:
       - airline
@@ -147,19 +156,24 @@ definitions:
     description: FlightCriteria with optional Destination airport
     properties:
       airline:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: Operating airline code
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: Flight number.
       departureAirport:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: Origin of the flight.
       departureDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date.
       destinationAirport:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: destination airport
     required:
       - airline
@@ -185,10 +199,12 @@ definitions:
     description: Allows to offload passengers by SSCI PassengerID and last name.
     properties:
       lastName:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: Passenger's last name
       passengerId:
-        $ref: '#/definitions/SsciPassengerId'
+        allOf: 
+          - $ref: '#/definitions/SsciPassengerId'
         description: Unique reference to identify a passenger in Check-in system.
     required:
       - lastName
@@ -314,47 +330,54 @@ definitions:
       id:
         type: string
       type:
-        $ref: '#/definitions/DocumentType'
+        allOf: 
+          - $ref: '#/definitions/DocumentType'
         description: Type of the document
       number:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
         description: Document number
       personName:
-        $ref: '#/definitions/PersonName'
+        allOf: 
+          - $ref: '#/definitions/PersonName'
         description: Passenger name
       nationality:
         $ref: >-
           https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended
-        description: Nationality country code
       countryOfBirth:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
         description: The code of country where the person was born.
       placeOfBirth:
         $ref: >-
           https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/String_From1to35
-        description: >-
-          This element contains unstructured details about person's place of
-          birth.
       dateOfBirth:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date of birth if different than in containing structure
       issuingCountry:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
         description: The code of country which issued the document
       applicableCountry:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
         description: The code of country which the document is applicable for e.g.
       issuingPlace:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: The place where the document has been issued
       issueDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the document was issued
       expiryDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date when the document will expire
       gender:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Enum_Gender'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Enum_Gender'
         description: Gender as provided in the document
     required:
       - type
@@ -366,7 +389,8 @@ definitions:
       value:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Email'
       type:
-        $ref: '#/definitions/EmailType'
+        allOf: 
+          - $ref: '#/definitions/EmailType'
         description: Indicates the type of the email.
     required:
       - value
@@ -386,20 +410,23 @@ definitions:
     description: A genetic type used to represent phone number
     properties:
       type:
-        $ref: '#/definitions/PhoneType'
+        allOf: 
+          - $ref: '#/definitions/PhoneType'
         description: Type of the phone number e.g.
       countryCode:
         $ref: >-
           https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Phone_Country
-        description: Country code portion of the number.
       areaCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Phone_Area'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Phone_Area'
         description: Area code portion of the number
       number:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PhoneNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PhoneNumber'
         description: The actual number
       extension:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PhoneNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PhoneNumber'
         description: Optional extension suffix
     required:
       - number
@@ -421,7 +448,8 @@ definitions:
     description: A genetic type used to represent AE
     properties:
       aeStatus:
-        $ref: '#/definitions/AEStatus'
+        allOf: 
+          - $ref: '#/definitions/AEStatus'
         description: Air Extra bag status
       value:
         type: string
@@ -442,31 +470,40 @@ definitions:
       id:
         type: string
       type:
-        $ref: '#/definitions/AddressType'
+        allOf: 
+          - $ref: '#/definitions/AddressType'
         description: The type of a address.
       companyName:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: Name of the company.
       personName:
-        $ref: '#/definitions/PersonName'
+        allOf: 
+          - $ref: '#/definitions/PersonName'
         description: Passenger name
       street1:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: Street part of an address.
       street2:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: Additional street part which might be required in some cases
       postalCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Postal'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Postal'
         description: Postal code.
       country:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
         description: ISO 3166-1 alpha-2 country codes
       city:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: City name
       stateProvince:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: State or province.
     additionalProperties: false
   AddressType:
@@ -519,22 +556,28 @@ definitions:
     type: object
     properties:
       prefix:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
         description: 'Prefix placed before the passenger name, such as Mr., Dr., Ms, etc.'
       first:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: First name
       middle:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: Optional middle name
       last:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: Last name
       suffix:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/TinyString'
         description: Optional suffix
       raw:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: Passenger surname as stored in the system.
       preferredFirstName:
         type: string
@@ -552,23 +595,24 @@ definitions:
       id:
         type: string
       typeCode:
-        $ref: >-
-          https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_TypeCode
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_TypeCode'
         description: The code of the card e.g.
       cardType:
-        $ref: >-
-          https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Enum_PaymentCardType
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Enum_PaymentCardType'
         description: Type of Payment Card whether CreditCard or DebitCard
       number:
-        $ref: >-
-          https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_Number
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_Number'
         description: The actual payment card number
       nameOnCard:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/ShortString'
         description: Owner name on the card
       expirationDetails:
-        $ref: >-
-          https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_ExpirationDetails
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/PaymentCard_ExpirationDetails'
         description: Month and year until the card is valid
       balance:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Money'
@@ -799,16 +843,16 @@ definitions:
     type: object
     properties:
       lastName:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to30
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's Last Name
       firstName:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to30
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's First Name
       middleName:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to30
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's Middle Name
     additionalProperties: false
   Enum_SSCI_Gender:
@@ -932,18 +976,22 @@ definitions:
     description: Passenger's journey detail
     properties:
       airlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: IATA Airline designator.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: Flight number
       departureAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: >-
           Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date of the flight.
     required:
       - airlineCode
@@ -969,16 +1017,19 @@ definitions:
     description: Airport specific information
     properties:
       scheduledDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Scheduled date of arrival or departure as applicable for airport.
       scheduledTime:
         type: string
         description: Scheduled time of arrival or departure as applicable for airport.
       estimatedDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Estimated date of arrival or departure as applicable for airport.
       estimatedTime:
-        type: string
+        allOf: 
+          - type: string
         description: Estimated time of arrival or departure as applicable for airport.
     additionalProperties: false
   Weight:
@@ -987,7 +1038,8 @@ definitions:
       value:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
       unit:
-        $ref: '#/definitions/WeightUnitCode'
+        allOf: 
+          - $ref: '#/definitions/WeightUnitCode'
         description: Unit of measure
     required:
       - value
@@ -1003,7 +1055,8 @@ definitions:
       value:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
       unit:
-        $ref: '#/definitions/LengthUnitCode'
+        allOf: 
+          - $ref: '#/definitions/LengthUnitCode'
         description: bag length unit codes.
     required:
       - value
@@ -1033,7 +1086,8 @@ definitions:
       reasonList:
         type: array
         items:
-          $ref: '#/definitions/Reason'
+          allOf: 
+          - $ref: '#/definitions/Reason'
           description: Details for Reason code
         maxItems: 25
     additionalProperties: false
@@ -1047,11 +1101,13 @@ definitions:
       bagTagList:
         type: array
         items:
-          $ref: '#/definitions/BagTag'
+          allOf: 
+          - $ref: '#/definitions/BagTag'
           description: Specifies bag tag details.
         maxItems: 99
       totalWeight:
-        $ref: '#/definitions/Weight'
+        allOf: 
+          - $ref: '#/definitions/Weight'
         description: Specifies the total baggage weight.
     additionalProperties: false
   BagTag:
@@ -1064,18 +1120,21 @@ definitions:
           Bag tag serial number.It can be 6 digit or 10 digit number, based on
           the carrier setting
       weight:
-        $ref: '#/definitions/Weight'
+        allOf: 
+          - $ref: '#/definitions/Weight'
         description: Specifies the weight of the bag.
       bagTypeList:
         type: array
         items:
-          $ref: '#/definitions/BagTypeDetails'
+          allOf: 
+          - $ref: '#/definitions/BagTypeDetails'
           description: List of bag tag types.
         maxItems: 99
       aeList:
         type: array
         items:
-          $ref: '#/definitions/AEDetails'
+          allOf: 
+          - $ref: '#/definitions/AEDetails'
           description: List of air extras to be associated to a bag
         maxItems: 99
     additionalProperties: false
@@ -1083,7 +1142,8 @@ definitions:
     type: object
     properties:
       itemId:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/long'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/long'
         description: Specefies the Unique AE identifier
       atpcoGroupCode:
         type: string
@@ -1145,29 +1205,36 @@ definitions:
     description: Flight Info
     properties:
       airlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: IATA Airline designator.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: Flight number
       departureAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: >-
           Origin airport code of the flight or Airport code from where the
           flight is departing
       departureDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date of the flight.
       arrivalAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: >-
           Destination airport code of the flight or Airport code where the
           flight is arriving
       departureGate:
-        $ref: '#/definitions/GateName'
+        allOf: 
+          - $ref: '#/definitions/GateName'
         description: flight departure gate
       arrivalGate:
-        $ref: '#/definitions/GateName'
+        allOf: 
+          - $ref: '#/definitions/GateName'
         description: flight arrival gate
     required:
       - airlineCode
@@ -1318,7 +1385,8 @@ definitions:
       editCodeAttributeList:
         type: array
         items:
-          $ref: >-
+          allOf: 
+          - $ref: >-
             #/definitions/EditCodeAttributeType
           description: Edit code Attribute Complex type
         maxItems: 99
@@ -1349,8 +1417,8 @@ definitions:
       timaticCountryInfoList:
         type: array
         items:
-          $ref: >-
-            #/definitions/TimaticCountryInfoType
+          allOf: 
+            - $ref: '#/definitions/TimaticCountryInfoType'
           description: Country code for the timatic detail
         maxItems: 99
     additionalProperties: false
@@ -1369,7 +1437,8 @@ definitions:
       sectionInfoList:
         type: array
         items:
-          $ref: '#/definitions/SectionInfoType'
+          allOf: 
+          - $ref: '#/definitions/SectionInfoType'
           description: Section Info from Timatic response
         maxItems: 99
     additionalProperties: false
@@ -1389,7 +1458,8 @@ definitions:
       subSectionInfoList:
         type: array
         items:
-          $ref: >-
+          allOf: 
+          - $ref: >-
             #/definitions/SubSectionInfoType
           description: Timatic Subsection info
         maxItems: 99
@@ -1431,24 +1501,29 @@ definitions:
     description: Generic Bag Tag print data XML
     properties:
       passengerName:
-        $ref: '#/definitions/PassengerName'
+        allOf: 
+          - $ref: '#/definitions/PassengerName'
         description: 'Passenger complete name information to whom, the bags belongs'
       reservation:
-        $ref: '#/definitions/Reservation'
+        allOf: 
+          - $ref: '#/definitions/Reservation'
         description: Reservation details of the passenger who checks the bag
       agentInfo:
-        $ref: '#/definitions/Agent'
+        allOf: 
+          - $ref: '#/definitions/Agent'
         description: >-
           This is Issuing Agent information, who checks in the bags, on behalf
           of the passenger, and this information also represents the point of
           sale
       flightInfo:
-        $ref: '#/definitions/BTFlightInfo'
+        allOf: 
+          - $ref: '#/definitions/BTFlightInfo'
         description: >-
           Operating airline, and flight detail information on which , the
           passenger is travelling and checks in the bag
       baggageInfo:
-        $ref: '#/definitions/BTBagDetails'
+        allOf: 
+          - $ref: '#/definitions/BTBagDetails'
         description: List of Bag Specific information that would be printed on each bag tag
     additionalProperties: false
   Reservation:
@@ -1505,19 +1580,23 @@ definitions:
         type: string
         description: Airline name in which the passenger is travelling
       operatingAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: IATA Airline code.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: Service number for the flight.
       departureDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Schedule Departure Date.
       departureTime:
         type: string
         description: Schedule Departure Time.
       departureDateEstimated:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Estimated Departure Date.
       departureTimeEstimated:
         type: string
@@ -1531,31 +1610,37 @@ definitions:
         type: string
         description: Airline name in which the passenger is travelling
       operatingAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: IATA Airline code.
       flightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: Service number for the flight.
       departureDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Schedule Departure Date.
       departureTime:
         type: string
         description: Schedule Departure Time.
       departureDateEstimated:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Estimated Departure Date.
       departureTimeEstimated:
         type: string
         description: Estimated Departure Time.
       arrivalAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: IATA City code of the transfer segment or destination
       arrivalAirportName:
         type: string
         description: IATA city name of the transfer segment or destination
       arrivalAirportCountryCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country'
         description: ISO country code of the transfer segment or destination
     additionalProperties: false
   BTBagDetails:
@@ -1573,7 +1658,8 @@ definitions:
       bagList:
         type: array
         items:
-          $ref: '#/definitions/BagDetails'
+          allOf: 
+          - $ref: '#/definitions/BagDetails'
           description: Bag specific information printed on the tag
         maxItems: 99
     additionalProperties: false
@@ -1581,15 +1667,18 @@ definitions:
     type: object
     properties:
       individualWeightAndUnit:
-        $ref: '#/definitions/Weight'
+        allOf: 
+          - $ref: '#/definitions/Weight'
         description: individual weight and its unit of measure
       bagTag:
-        $ref: '#/definitions/BTBagTag'
+        allOf: 
+          - $ref: '#/definitions/BTBagTag'
         description: 10 or 6 digit Bag tag number and its issuance details
       bagTextList:
         type: array
         items:
-          $ref: '#/definitions/BagText'
+          allOf: 
+          - $ref: '#/definitions/BagText'
           description: Printable Description Text on Bag Tag
         maxItems: 25
       specialServiceTypeList:
@@ -1606,14 +1695,15 @@ definitions:
       bagTypeList:
         type: array
         items:
-          $ref: >-
-            #/definitions/BTBagTypeDetails
+          allOf: 
+            - $ref: '#/definitions/BTBagTypeDetails'
           description: 'Bag tag type text, optionally with a reason for issuance'
         maxItems: 25
       bagRouteList:
         type: array
         items:
-          $ref: '#/definitions/BagRouteDetails'
+          allOf: 
+          - $ref: '#/definitions/BagRouteDetails'
           description: >-
             Destination and connecting flight information thru transfer segments
             for the bag route
@@ -1626,16 +1716,19 @@ definitions:
         type: string
         description: 10 digit Bag tag number
       issuedAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: Bag Tag Issuing Airline code
       issueDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Date of bag tag issue
       issueTime:
         type: string
         description: Time of bag tag issue
       parseBagTagNumber:
-        $ref: '#/definitions/ParseBagTagNumber'
+        allOf: 
+          - $ref: '#/definitions/ParseBagTagNumber'
         description: 10 digit bag tag number and its details
     additionalProperties: false
   ParseBagTagNumber:
@@ -1671,8 +1764,8 @@ definitions:
     type: object
     properties:
       bagTypeCode:
-        $ref: >-
-          #/definitions/UpperCaseAlphaLength1
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaLength1'
         description: bag type code
       description:
         type: string
@@ -1680,7 +1773,8 @@ definitions:
       reasonList:
         type: array
         items:
-          $ref: '#/definitions/Reason'
+          allOf: 
+          - $ref: '#/definitions/Reason'
           description: Details for Reason code
         maxItems: 25
     additionalProperties: false
@@ -1688,19 +1782,20 @@ definitions:
     type: object
     properties:
       flightInfo:
-        $ref: >-
-          #/definitions/BTBagRouteFlightInfo
+        allOf: 
+          - $ref: '#/definitions/BTBagRouteFlightInfo'
         description: Bag tag route segment flight information
       checkinSequenceNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/int'
         description: >-
           passenger check in sequence Number relative to other passengeres
           checked-in on the flight
       operatingTypeAirlineList:
         type: array
         items:
-          $ref: >-
-            #/definitions/BTOperatingTypeAirlineList
+          allOf: 
+            - $ref: '#/definitions/BTOperatingTypeAirlineList'
           description: Operating ailine aircraft's Wetlease or Commuter detail information
         maxItems: 9
       airportZoneGroup:
@@ -1711,12 +1806,12 @@ definitions:
     type: object
     properties:
       wetLeaseAirline:
-        $ref: >-
-          #/definitions/BTWetLeaseAirlineInfo
+        allOf: 
+          - $ref: '#/definitions/BTWetLeaseAirlineInfo'
         description: Wetlease Operating Airline information
       commuterAirline:
-        $ref: >-
-          #/definitions/BTCommuterAirlineInfo
+        allOf: 
+          - $ref: '#/definitions/BTCommuterAirlineInfo'
         description: Commuter Airline Information
     additionalProperties: false
   BTWetLeaseAirlineInfo:
@@ -1736,7 +1831,8 @@ definitions:
     type: object
     properties:
       commuterAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: Commuter Airline code
       commuterAirlineName:
         type: string
@@ -1879,7 +1975,8 @@ definitions:
       seatInfoList:
         type: array
         items:
-          $ref: '#/definitions/SeatDetails'
+          allOf: 
+            - $ref: '#/definitions/SeatDetails'
           description: Seat List
         maxItems: 2
       extraSeatDetails:
@@ -1917,7 +2014,8 @@ definitions:
       entitlementTextList:
         type: array
         items:
-          $ref: '#/definitions/BPSEntitlement'
+          allOf: 
+            - $ref: '#/definitions/BPSEntitlement'
           description: >-
             Group for: SpeedText ; PingTip ; SpeedText ; EvenMoreSpeedText ;
             ExclusiveWaitingArea ; PriorityAccessText ;SkyPriorityText ;
@@ -1926,7 +2024,8 @@ definitions:
       genericTextList:
         type: array
         items:
-          $ref: '#/definitions/BPSTextGroup'
+          allOf: 
+            - $ref: '#/definitions/BPSTextGroup'
           description: >-
             Group for: TicketText ; FlightCouponText ; CarryOnText ; InfantText
             ;  ChildText ; THRUText ; PremiumText ;  ExitText ; TBOText ;
@@ -2152,10 +2251,12 @@ definitions:
     description: Date range used in requests
     properties:
       from:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Starting date of the range
       to:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: End date of the range
     required:
       - from
@@ -2214,19 +2315,24 @@ definitions:
     type: object
     properties:
       segmentID:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/short'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/short'
         description: Segment no.
       operatingAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: operating airline code
       operatingFlightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: operating flight number
       marketingAirlineCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airline'
         description: marketing airline code
       marketingFlightNumber:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
         description: marketing flight number
       thirdPartyGroundHandled:
         type: boolean
@@ -2237,28 +2343,33 @@ definitions:
         description: flag to indicate that this is an IATCI flight
         default: 'false'
       departureAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: flight departure city code
       destinationAirportCode:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Airport'
         description: flight arrival city code
       departureDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: flight departure date
       editCodeList:
-        $ref: '#/definitions/EditCodeList'
+        allOf: 
+          - $ref: '#/definitions/EditCodeList'
         description: passenger's list of edit codes
       travelDocumentList:
         type: array
         items:
-          $ref: >-
-            #/definitions/TravelDocumentInfo
+          allOf: 
+            - $ref: '#/definitions/TravelDocumentInfo'
           description: List of Travel Documents
         maxItems: 99
       destinationAddressList:
         type: array
         items:
-          $ref: '#/definitions/AddressInfo'
+          allOf: 
+            - $ref: '#/definitions/AddressInfo'
           description: >-
             address for Destination, it is mandatory in case of action EDIT, not
             needed for action DELETE
@@ -2266,7 +2377,8 @@ definitions:
       residentAddressList:
         type: array
         items:
-          $ref: '#/definitions/AddressInfo'
+          allOf: 
+            - $ref: '#/definitions/AddressInfo'
           description: >-
             address for Residence, it is mandatory in case of action EDIT, not
             needed for action DELETE
@@ -2274,7 +2386,8 @@ definitions:
       visaList:
         type: array
         items:
-          $ref: '#/definitions/VisaType'
+          allOf: 
+            - $ref: '#/definitions/VisaType'
           description: >-
             address for Residence, it is mandatory in case of action EDIT, not
             needed for action DELETE
@@ -2282,8 +2395,8 @@ definitions:
       knownTravelerList:
         type: array
         items:
-          $ref: >-
-            #/definitions/OtherDocumentType
+          allOf: 
+            - $ref: '#/definitions/OtherDocumentType'
           description: >-
             address for Residence, it is mandatory in case of action EDIT, not
             needed for action DELETE
@@ -2291,8 +2404,8 @@ definitions:
       redressList:
         type: array
         items:
-          $ref: >-
-            #/definitions/OtherDocumentType
+          allOf: 
+            - $ref: '#/definitions/OtherDocumentType'
           description: >-
             address for Residence, it is mandatory in case of action EDIT, not
             needed for action DELETE
@@ -2300,37 +2413,41 @@ definitions:
       contactInfoList:
         type: array
         items:
-          $ref: >-
-            #/definitions/PassengerContactType
+          allOf: 
+            - $ref: '#/definitions/PassengerContactType'
           description: Passenger Contact
         maxItems: 99
       hajList:
         type: array
         items:
-          $ref: '#/definitions/HajAndUmrhType'
+          allOf: 
+            - $ref: '#/definitions/HajAndUmrhType'
           description: Haj
         maxItems: 2
       umrhList:
         type: array
         items:
-          $ref: '#/definitions/HajAndUmrhType'
+          allOf: 
+            - $ref: '#/definitions/HajAndUmrhType'
           description: umrh
         maxItems: 2
       ifetList:
         type: array
         items:
-          $ref: '#/definitions/IfetType'
+          allOf: 
+            - $ref: '#/definitions/IfetType'
           description: Infant Vcr details
         maxItems: 99
       requiredInfoList:
         type: array
         items:
-          $ref: >-
-            #/definitions/RequiredInfoType
+          allOf: 
+            - $ref: '#/definitions/RequiredInfoType'
           description: CheckIn Requirements
         maxItems: 99
       frequentFlyer:
-        $ref: '#/definitions/FrequentFlyerType'
+        allOf: 
+          - $ref: '#/definitions/FrequentFlyerType'
         description: Frequent Flyer information
     additionalProperties: false
   FrequentFlyerType:
@@ -2390,12 +2507,12 @@ definitions:
         type: boolean
         description: infant indicator
       number:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to30
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Document/Redress number
       countryCode:
-        $ref: >-
-          #/definitions/UpperCaseAlphaLength2to3
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaLength2to3'
         description: applicable country code
     additionalProperties: false
   PassengerContactType:
@@ -2410,16 +2527,16 @@ definitions:
     type: object
     properties:
       name:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to30
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: name of the contact person
       contactDetails:
-        $ref: >-
-          #/definitions/StringLength1to255
+        allOf: 
+          - $ref: '#/definitions/StringLength1to255'
         description: phone number along with country code
       relatedData:
-        $ref: >-
-          #/definitions/StringLength1to255
+        allOf: 
+          - $ref: '#/definitions/StringLength1to255'
         description: other necessary details about the contact
     required:
       - name
@@ -2433,16 +2550,16 @@ definitions:
         description: infant indicator
         default: 'false'
       streetAddress:
-        $ref: >-
-          #/definitions/AlphaNumericSpaceLength0to35
+        allOf: 
+          - $ref: '#/definitions/AlphaNumericSpaceLength0to35'
         description: StreetAdress
       city:
-        $ref: >-
-          #/definitions/AlphaNumericSpaceLength0to35
+        allOf: 
+          - $ref: '#/definitions/AlphaNumericSpaceLength0to35'
         description: City
       state:
-        $ref: >-
-          #/definitions/AlphaNumericSpaceLength0to35
+        allOf: 
+          - $ref: '#/definitions/AlphaNumericSpaceLength0to35'
         description: StateProvince
       countryCode:
         type: string
@@ -2460,23 +2577,24 @@ definitions:
         description: infant indicator
         default: 'false'
       placeOfBirth:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to35
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to35'
         description: Passenger's place of birth
       number:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to30
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Visa number
       issuingCity:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to35
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to35'
         description: City where visa was issued
       dateOfIssue:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Date of visa issuance, Format: YYYY-MM-DD'
       countryCode:
-        $ref: >-
-          #/definitions/UpperCaseAlphaLength2to3
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaLength2to3'
         description: >-
           Visa applicable country code, Format : 2 or 3 character IATA country
           code
@@ -2490,44 +2608,48 @@ definitions:
         description: infant indicator
         default: 'false'
       type:
-        $ref: >-
-          #/definitions/Passenger_DocumentType
+        allOf: 
+          - $ref: '#/definitions/Passenger_DocumentType'
         description: Document type; lookup enum for valid types
       number:
-        $ref: >-
-          #/definitions/UpperCaseAlphaSpaceNumericLength1to20
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to20'
         description: Document number
       dateOfBirth:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Date of Birth, Format: YYYY-MM-DD'
       personName:
-        $ref: '#/definitions/SsciPersonName'
+        allOf: 
+          - $ref: '#/definitions/SsciPersonName'
         description: Passenger Name details
       nationality:
-        $ref: >-
-          https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended'
         description: >-
           Passenger's nationality mentioned in the Document, Format : 2 or 3
           character IATA country code
       gender:
-        $ref: '#/definitions/Enum_SSCI_Gender'
+        allOf: 
+          - $ref: '#/definitions/Enum_SSCI_Gender'
         description: Passenger's gender.
       issuingCountryCode:
-        $ref: >-
-          https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended'
         description: >-
           Document Issuing country code, Format : 2 or 3 character IATA country
           code
       dateOfExpiration:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Document expiration date, Format: YYYY-MM-DD'
       swipeIndicator:
-        $ref: >-
-          #/definitions/SwipeIndicatorType
+        allOf: 
+          - $ref: '#/definitions/SwipeIndicatorType'
         description: Document's swipe indicator
       multinamePassportHolder:
-        $ref: >-
-          #/definitions/MultinamePassportHolderType
+        allOf: 
+          - $ref: '#/definitions/MultinamePassportHolderType'
         description: >-
           Indicator for multi-name passport holder, only valid with PASSPORT
           document type
@@ -2543,21 +2665,24 @@ definitions:
         description: infant indicator
         default: 'false'
       documentTypeId:
-        $ref: >-
-          #/definitions/UpperCaseStringLength1to35
+        allOf: 
+          - $ref: '#/definitions/UpperCaseStringLength1to35'
         description: Required Document Type number
       residencyDocument:
-        $ref: >-
-          #/definitions/ResidencyDocumentType
+        allOf: 
+          - $ref: '#/definitions/ResidencyDocumentType'
         description: Timatic document type
       stayType:
-        $ref: '#/definitions/Enum_StayType'
+        allOf: 
+          - $ref: '#/definitions/Enum_StayType'
         description: Timatic stay type
       returnDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Timatic return date.2017-08-14
       visa:
-        $ref: '#/definitions/Enum_VisaVerified'
+        allOf: 
+          - $ref: '#/definitions/Enum_VisaVerified'
         description: Visa Verified indicator
     additionalProperties: false
   TimaticDocumentTypeRS:
@@ -2574,14 +2699,15 @@ definitions:
         type: string
         description: Required Document Type number
       residencyDocument:
-        $ref: >-
-          #/definitions/ResidencyDocumentTypeRS
+        allOf: 
+          - $ref: '#/definitions/ResidencyDocumentTypeRS'
         description: Timatic document type
       stayType:
         type: string
         description: Timatic stay type
       returnDate:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
+        allOf: 
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Timatic return date.2017-08-14
       visa:
         type: string
@@ -2600,12 +2726,12 @@ definitions:
     description: Timatic Residency Document
     properties:
       countryCode:
-        $ref: >-
-          #/definitions/UpperCaseAlphaLength2to3
+        allOf: 
+          - $ref: '#/definitions/UpperCaseAlphaLength2to3'
         description: country code in 2 or 3 character
       id:
-        $ref: >-
-          #/definitions/UpperCaseStringLength1to35
+        allOf: 
+          - $ref: '#/definitions/UpperCaseStringLength1to35'
         description: Timatic Residency Document Type Id
     additionalProperties: false
   ResidencyDocumentTypeRS:
