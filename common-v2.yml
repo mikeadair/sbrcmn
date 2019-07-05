@@ -1460,7 +1460,7 @@ definitions:
         items:
           allOf: 
           - $ref: >-
-            #/definitions/SubSectionInfoType
+              #/definitions/SubSectionInfoType
           description: Timatic Subsection info
         maxItems: 99
     additionalProperties: false
