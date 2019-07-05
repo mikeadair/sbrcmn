@@ -926,6 +926,7 @@ definitions:
         items:
           type: string
           description: Edit code list
+          example: 'DOCS'
         maxItems: 99
     additionalProperties: false
   ErrorType:
@@ -982,6 +983,7 @@ definitions:
       flightNumber:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/FlightNumber'
+        example: '371' 
         description: Flight number
       departureAirportCode:
         allOf: 
@@ -993,6 +995,7 @@ definitions:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Local departure date of the flight.
+        example: '2019-07-21'
     required:
       - airlineCode
       - flightNumber
@@ -1155,11 +1158,13 @@ definitions:
       editCode:
         type: string
         description: 'edit code, if applicable'
+        example: 'DHS'
       infoList:
         type: array
         items:
           type: string
           description: 'multiple lines of text, if applicable'
+          example: '\"**ZONE - 2**\"'
         maxItems: 999
     additionalProperties: false
   FlightInfo:
