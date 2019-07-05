@@ -1438,7 +1438,7 @@ definitions:
         type: array
         items:
           allOf: 
-          - $ref: '#/definitions/SectionInfoType'
+            - $ref: '#/definitions/SectionInfoType'
           description: Section Info from Timatic response
         maxItems: 99
     additionalProperties: false
