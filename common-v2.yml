@@ -2464,12 +2464,15 @@ definitions:
       type:
         type: string
         description: Frequent Flyer Type
+        example: 'FF'
       airlineCode:
         type: string
         description: airlineCode
+        example: 'VA'
       number:
         type: string
         description: Frequent Flyer Number
+        example: '1410011745'
     additionalProperties: false
   IfetType:
     type: object
@@ -2477,33 +2480,42 @@ definitions:
       electronicTicketNumber:
         type: string
         description: Vcr Number
+        example: '6072768356438'
       couponCode:
         type: string
         description: code
+        example: 'C01'
       departureDate:
         type: string
         description: date
+        example: '2019-10-27'
       bookingClassCode:
         type: string
         description: booking code
+        example: 'Y'
       departureAirportCode:
         type: string
         description: origin
+        example: 'AUH'
       arrivalAirportCode:
         type: string
         description: Destination
+        example: 'KWI'
       couponStatus:
         type: string
         description: Coupon status
+        example: 'USED'
     additionalProperties: false
   HajAndUmrhType:
     type: object
     properties:
       infant:
         type: boolean
+        example: false
       passengerName:
         type: string
         description: Passenger  name
+        example: 'DEO'
     additionalProperties: false
   OtherDocumentType:
     type: object
@@ -2692,11 +2704,12 @@ definitions:
       infant:
         type: boolean
         description: infant indicator
-        default: 'false'
+        example: false
       documentTypeId:
         allOf: 
           - $ref: '#/definitions/UpperCaseStringLength1to35'
         description: Required Document Type number
+        example: '2'
       residencyDocument:
         allOf: 
           - $ref: '#/definitions/ResidencyDocumentType'
@@ -2709,6 +2722,7 @@ definitions:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Timatic return date.2017-08-14
+        example: '2019-07-05'
       visa:
         allOf: 
           - $ref: '#/definitions/Enum_VisaVerified'
@@ -2723,10 +2737,11 @@ definitions:
       infant:
         type: boolean
         description: infant indicator
-        default: 'false'
+        example: false
       documentType:
         type: string
         description: Required Document Type number
+        example: '2'
       residencyDocument:
         allOf: 
           - $ref: '#/definitions/ResidencyDocumentTypeRS'
@@ -2734,20 +2749,29 @@ definitions:
       stayType:
         type: string
         description: Timatic stay type
+        example: 'BUSINESS'
       returnDate:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: Timatic return date.2017-08-14
+        example: '2017-07-05'
       visa:
         type: string
         description: Visa Verified indicator
+        example: 'VERIFIED'
     additionalProperties: false
   Enum_StayType:
+    type: string
+    description: Stay Type
+    example: 'BUSINESS'
     enum:
       - BUSINESS
       - VACATION
       - DUTY
   Enum_VisaVerified:
+    type: string
+    description: Type
+    example: 'VERIFIED'
     enum:
       - VERIFIED
   ResidencyDocumentType:
@@ -2758,10 +2782,12 @@ definitions:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaLength2to3'
         description: country code in 2 or 3 character
+        example: 'IND'
       id:
         allOf: 
           - $ref: '#/definitions/UpperCaseStringLength1to35'
         description: Timatic Residency Document Type Id
+        example: '2'
     additionalProperties: false
   ResidencyDocumentTypeRS:
     type: object
