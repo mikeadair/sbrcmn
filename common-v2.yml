@@ -1418,10 +1418,11 @@ definitions:
       overAllStatus:
         type: string
         description: timatic status
+        example: 'NOT OK TO BOARD'
       infant:
         type: boolean
         description: infant indicater
-        default: 'false'
+        example: false
       timaticCountryInfoList:
         type: array
         items:
@@ -1436,12 +1437,15 @@ definitions:
       status:
         type: string
         description: timatic status
+        example: 'NOT OK TO BOARD'
       countryName:
         type: string
         description: Country name for the timatic detail
+        example: 'UNITED STATES'
       countryCode:
         type: string
         description: Country code for the timatic detail
+        example: 'US'
       sectionInfoList:
         type: array
         items:
@@ -1457,12 +1461,15 @@ definitions:
       name:
         type: string
         description: Timatic Section/Subsection Name
+        example: 'DOC'
       type:
         type: string
         description: Timatic Section/Subsection Type
+        example: 'REQUIREMENT'
       text:
         type: string
         description: Timatic Section/Subsection Text
+        example: 'VISA REQUIRED'
       subSectionInfoList:
         type: array
         items:
@@ -1479,12 +1486,15 @@ definitions:
       name:
         type: string
         description: Timatic Section/Subsection Name
+        example: 'DOC'
       type:
         type: string
         description: Timatic Section/Subsection Type
+        example: 'REQUIREMENT'
       text:
         type: string
         description: Timatic Section/Subsection Text
+        example: 'VISA REQUIRED'
     additionalProperties: false
   TimaticType:
     type: object
@@ -2796,9 +2806,11 @@ definitions:
       countryCode:
         type: string
         description: country code in 2 or 3 character
+        example: 'IND'
       type:
         type: string
         description: Timatic Residency Document Type Id
+        example: '2'
     additionalProperties: false
   PrintDataRS:
     type: object
