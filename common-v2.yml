@@ -846,17 +846,14 @@ definitions:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's Last Name
-        example: 'DOE'
       firstName:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's First Name
-        example: 'JONES'
       middleName:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's Middle Name
-        example: 'K'
     additionalProperties: false
   Enum_SSCI_Gender:
     type: string
@@ -2614,7 +2611,7 @@ definitions:
       infant:
         type: boolean
         description: infant indicator
-        example: 'false'
+        default: 'false'
       type:
         allOf: 
           - $ref: '#/definitions/Passenger_DocumentType'
@@ -2636,7 +2633,7 @@ definitions:
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended'
         description: >-
           Passenger's nationality mentioned in the Document, Format : 2 or 3
-          character IATA country code  
+          character IATA country code
       gender:
         allOf: 
           - $ref: '#/definitions/Enum_SSCI_Gender'
