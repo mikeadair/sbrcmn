@@ -2514,20 +2514,24 @@ definitions:
       infant:
         type: boolean
         description: infant indicator
+        example: false
       number:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Document/Redress number
+        example: '1234ABCD'
       countryCode:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaLength2to3'
         description: applicable country code
+        example: 'IND'
     additionalProperties: false
   PassengerContactType:
     type: object
     properties:
       refusedByPassenger:
         type: boolean
+        example: false
       contactData:
         $ref: '#/definitions/ContactType'
     additionalProperties: false
@@ -2538,14 +2542,17 @@ definitions:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: name of the contact person
+        example: 'DANNY'
       contactDetails:
         allOf: 
           - $ref: '#/definitions/StringLength1to255'
         description: phone number along with country code
+        example: 'US12345678'
       relatedData:
         allOf: 
           - $ref: '#/definitions/StringLength1to255'
         description: other necessary details about the contact
+        example: 'DOES FATHER'
     required:
       - name
       - contactDetails
