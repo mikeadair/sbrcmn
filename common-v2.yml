@@ -1381,7 +1381,7 @@ definitions:
         description: 'Status State - ValidationRequired, ValidationFailed, WithDOCRequired'
       infoText:
         type: string
-        description: Outcome of the code request
+        description: info text
     additionalProperties: false
   PassengerEditCodeType:
     type: object
