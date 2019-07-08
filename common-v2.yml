@@ -1043,10 +1043,12 @@ definitions:
     properties:
       value:
         $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
+        example: '30'
       unit:
         allOf: 
           - $ref: '#/definitions/WeightUnitCode'
         description: Unit of measure
+        example: 'KG'
     required:
       - value
     additionalProperties: false
