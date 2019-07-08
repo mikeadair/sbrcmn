@@ -2611,11 +2611,12 @@ definitions:
       infant:
         type: boolean
         description: infant indicator
-        default: 'false'
+        example: 'false'
       type:
         allOf: 
           - $ref: '#/definitions/Passenger_DocumentType'
         description: Document type; lookup enum for valid types
+        example: 'PASSPORT'
       number:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to20'
