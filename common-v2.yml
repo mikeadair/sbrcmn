@@ -846,14 +846,17 @@ definitions:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's Last Name
+        example: 'DOE'
       firstName:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's First Name
+        example: 'JONES'
       middleName:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's Middle Name
+        example: 'K'
     additionalProperties: false
   Enum_SSCI_Gender:
     type: string
@@ -2635,6 +2638,7 @@ definitions:
         description: >-
           Passenger's nationality mentioned in the Document, Format : 2 or 3
           character IATA country code
+        example: 'IND'  
       gender:
         allOf: 
           - $ref: '#/definitions/Enum_SSCI_Gender'
@@ -2645,10 +2649,12 @@ definitions:
         description: >-
           Document Issuing country code, Format : 2 or 3 character IATA country
           code
+        example: 'IN'  
       dateOfExpiration:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Document expiration date, Format: YYYY-MM-DD'
+        example: '2020-10-21'
       swipeIndicator:
         allOf: 
           - $ref: '#/definitions/SwipeIndicatorType'
@@ -2797,9 +2803,15 @@ definitions:
       - SPECIAL_PASSPORT
       - MISSION_OR_SERVICE_PASSPORT
   SwipeIndicatorType:
+    type: string
+    description: Swipe Indicator Type
+    example: 'S1'
     enum:
       - S1
       - S2
   MultinamePassportHolderType:
+    type: string
+    description: Multiname Passport Holder Type
+    example: 'H'
     enum:
       - H
