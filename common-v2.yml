@@ -846,14 +846,17 @@ definitions:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's Last Name
+        example: 'DOE'
       firstName:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's First Name
+        example: 'JONES'
       middleName:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Passenger's Middle Name
+        example: 'K'
     additionalProperties: false
   Enum_SSCI_Gender:
     type: string
@@ -2611,19 +2614,22 @@ definitions:
       infant:
         type: boolean
         description: infant indicator
-        default: 'false'
+        example: 'false'
       type:
         allOf: 
           - $ref: '#/definitions/Passenger_DocumentType'
         description: Document type; lookup enum for valid types
+        example: 'PASSPORT'
       number:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to20'
         description: Document number
+        example:'23685955'
       dateOfBirth:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Date of Birth, Format: YYYY-MM-DD'
+        example: '2001-10-21'
       personName:
         allOf: 
           - $ref: '#/definitions/SsciPersonName'
@@ -2631,16 +2637,19 @@ definitions:
       nationality:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended'
+        example: 'IND'
         description: >-
           Passenger's nationality mentioned in the Document, Format : 2 or 3
-          character IATA country code
+          character IATA country code  
       gender:
         allOf: 
           - $ref: '#/definitions/Enum_SSCI_Gender'
         description: Passenger's gender.
+        example: 'MALE'
       issuingCountryCode:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/common-v15.yml#/definitions/Code_Country_Extended'
+        example: 'IND'
         description: >-
           Document Issuing country code, Format : 2 or 3 character IATA country
           code
@@ -2648,13 +2657,16 @@ definitions:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Document expiration date, Format: YYYY-MM-DD'
+        example: '2020-10-22'
       swipeIndicator:
         allOf: 
           - $ref: '#/definitions/SwipeIndicatorType'
         description: Document's swipe indicator
+        example: 'S1'
       multinamePassportHolder:
         allOf: 
           - $ref: '#/definitions/MultinamePassportHolderType'
+        example: 'H'
         description: >-
           Indicator for multi-name passport holder, only valid with PASSPORT
           document type
