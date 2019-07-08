@@ -2556,25 +2556,30 @@ definitions:
       infant:
         type: boolean
         description: infant indicator
-        default: 'false'
+        example: 'false'
       streetAddress:
         allOf: 
           - $ref: '#/definitions/AlphaNumericSpaceLength0to35'
         description: StreetAdress
+        example: 'INDIA ST'
       city:
         allOf: 
           - $ref: '#/definitions/AlphaNumericSpaceLength0to35'
         description: City
+        example: 'DALLAS'
       state:
         allOf: 
           - $ref: '#/definitions/AlphaNumericSpaceLength0to35'
         description: StateProvince
+        example: 'TX'
       countryCode:
         type: string
         description: CountryCode
+        example: 'USA'
       zipCode:
         type: string
         description: ZipCode
+        example: '0719'
     additionalProperties: false
   VisaType:
     type: object
@@ -2583,29 +2588,34 @@ definitions:
       infant:
         type: boolean
         description: infant indicator
-        default: 'false'
+        example: 'false'
       placeOfBirth:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to35'
         description: Passenger's place of birth
+        example: 'IND'
       number:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to30'
         description: Visa number
+        example: 'ABCD1234'
       issuingCity:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to35'
         description: City where visa was issued
+        example: 'DEL'
       dateOfIssue:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Date of visa issuance, Format: YYYY-MM-DD'
+        example: '2019-07-05'
       countryCode:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaLength2to3'
         description: >-
           Visa applicable country code, Format : 2 or 3 character IATA country
           code
+        example: 'IND'  
     additionalProperties: false
   TravelDocumentInfo:
     type: object
