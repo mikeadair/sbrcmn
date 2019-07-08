@@ -2616,7 +2616,6 @@ definitions:
         allOf: 
           - $ref: '#/definitions/Passenger_DocumentType'
         description: Document type; lookup enum for valid types
-        example: 'PASSPORT'
       number:
         allOf: 
           - $ref: '#/definitions/UpperCaseAlphaSpaceNumericLength1to20'
@@ -2778,6 +2777,9 @@ definitions:
           type: string
     additionalProperties: false
   Passenger_DocumentType:
+    type: string
+    description: Document type
+    example: 'PASSPORT'
     enum:
       - PASSPORT
       - ALIEN_CARD
