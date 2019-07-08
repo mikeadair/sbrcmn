@@ -1042,18 +1042,19 @@ definitions:
     description: Represents baggage weight and unit
     properties:
       value:
-        $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
+        allOf:
+          - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/integer'
         example: '30'
       unit:
         allOf: 
           - $ref: '#/definitions/WeightUnitCode'
-        description: Unit of measure
-        example: 'KG'
+        description: Unit of measure        
     required:
       - value
     additionalProperties: false
   WeightUnitCode:
     description: Specifies the weight unit of measure.
+    example: 'KG'
     enum:
       - KG
       - LB
