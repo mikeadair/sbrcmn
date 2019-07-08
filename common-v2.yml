@@ -2624,6 +2624,7 @@ definitions:
         allOf: 
           - $ref: 'https://raw.githubusercontent.com/mikeadair/sbrcmn/master/types_v01_00.yml#/definitions/date'
         description: 'Date of Birth, Format: YYYY-MM-DD'
+        example: '2001-10-13'
       personName:
         allOf: 
           - $ref: '#/definitions/SsciPersonName'
