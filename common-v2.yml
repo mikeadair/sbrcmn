@@ -1053,6 +1053,7 @@ definitions:
       - value
     additionalProperties: false
   WeightUnitCode:
+    type: string
     description: Specifies the weight unit of measure.
     example: 'KG'
     enum:
