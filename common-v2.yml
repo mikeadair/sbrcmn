@@ -1430,9 +1430,7 @@ definitions:
       timaticCountryInfoList:
         type: array
         items:
-          allOf: 
-            - $ref: '#/definitions/TimaticCountryInfoType'
-          description: Country code for the timatic detail
+          $ref: '#/definitions/TimaticCountryInfoType'
         maxItems: 99
     additionalProperties: false
   TimaticCountryInfoType:
